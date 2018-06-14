@@ -1,59 +1,92 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from django.db import models
 from django.utils import timezone
 from datetime import date
+from django.db import models
 
-
-POSITION_CHOICE= (  
-    ('Base', 'Base'),
-    ('Escolta', 'Escolta'),
-    ('Alero', 'Alero'),
-    ('Ala-pivot','Ala-pivot'),
-    ('Pivot','Pivot'),
+SABOR_CHOICE = (
+  ('Choc', 'Chocolate'),
+  ('Mnj', 'Manjar'),
+  ('Ntl', 'Nutella'),
+  ('S.N','Selva negra'),
+  ('C.P','Crema-Pastelera'),
+  ('3L','3Leches'),
+  ('M.L','Merengue/Lucuma'),
 )
 
-POSITION_DEFAULT = 'Base'
+TIPO_CHOICE = (
+  ('M.H', 'Millhojas'),
+  ('Bzch', 'Bizcocho'),
+  ('Ygt', 'Yogurt'),
+  ('Pqq','Panqueque'),
+  ('H.ca','Hojarasca'),
+  ('Hlds','Heladas'),
+  ('Mrg','Merengue'),
+)
 
-class Team(models.Model):
-    name = models.CharField(max_length=100)
-    team_description = models.TextField()
-    team_img = models.ImageField()
-    team_code = models.CharField(max_length=3)
-    def __str__(self):
-        return self.name
+MEDIDA_CHOICE = (
+	('Gr','Gramos'),
+	('Cc', 'Centimetro cubico'),
+	)
 
-class Player(models.Model):
-    name = models.CharField(max_length=240)
-    last_name = models.CharField(max_length=240)
-    nick_name = models.CharField(max_length=240)
-    age = models.IntegerField(default=18)
-    birth_date = models.DateField(default=date.today)
+SABOR_DEFAULT = 'S.N'
+TIPO_DEFAULT = 'Bzch'
+MEDIDA_DEFAULT = 'Gr'
+
+
+class Stock(models.Model):
+	medida = models.CharField(
+				max_length=12,
+				choices= MEDIDA_CHOICE,
+				default= MEDIDA_DEFAULT
+			)
+	cantidad =models.IntegerField()
+
+class Materia(models.Model):
+	cod = models.IntegerField()
+	nombre = models.CharField(max_length=240)
+	stock = models.ForeignKey(Stock,on_delete=models.CASCADE, blank = True)
+	def __str__(self):
+		return self.nombre
+	
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=240)
+    apellido = models.CharField(max_length=240)
     rut = models.CharField(max_length=240)
-    height = models.IntegerField(default=170)
-    weight = models.IntegerField(default=70)
-    mail = models.TextField()
-    position = models.CharField(
-            max_length=9,
-            choices= POSITION_CHOICE,
-            default= POSITION_DEFAULT
-        )
-    team = models.ForeignKey(Team,on_delete=models.CASCADE, blank = True, null=True)
-    photo = models.ImageField()
+    mail = models.CharField(max_length=240)
     def __str__(self):
-        return self.name
-    
-class Coach(models.Model):
-    name = models.CharField(max_length=200)
-    mail = models.TextField()
-    age = models.IntegerField(default=18)
-    nick_name = models.CharField(max_length=240)
-    rut = models.CharField(max_length=240)
-    team = models.ForeignKey(Team,on_delete=models.CASCADE, blank = True, null=True )
-    def __str__(self):
-        return self.name
+        return self.nombre
+	
+class Pasteles(models.Model):
+	nombre = models.CharField(max_length=240)
+	sabor = models.CharField(
+			max_length=10,
+			choices= SABOR_CHOICE,
+			default= SABOR_DEFAULT
+	)
+	tipo = models.CharField(
+			max_length=10,
+			choices= TIPO_CHOICE,
+			default= TIPO_DEFAULT
+	)
+	vegano = models.BooleanField(default=False)
+	celiaco = models.BooleanField(default=False)
+	def __str__(self):
+		return self.nombre
 
-class Match(models.Model):
-    match = models.TextField(max_length=200)
-    def __str__(self):
-        return self.match
+class Pedido(models.Model):
+	fecha_pedido = models.DateField(default=date.today)
+	fecha_entrega = models.DateField()
+	cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE, blank = True)
+	materia = models.ManyToManyField(Materia,blank = True)
+	sabor = models.CharField(
+			max_length=10,
+			choices= SABOR_CHOICE,
+			default= SABOR_DEFAULT
+		)
+	tipo = models.CharField(
+			max_length=10,
+			choices= TIPO_CHOICE,
+			default= TIPO_DEFAULT
+		)
+	vegano = models.BooleanField(default=False)
+	celiaco = models.BooleanField(default=False)
+	
