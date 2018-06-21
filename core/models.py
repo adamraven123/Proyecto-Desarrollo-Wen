@@ -1,52 +1,26 @@
 from django.utils import timezone
 from datetime import date
 from django.db import models
-
-SABOR_CHOICE = (
-  ('Choc', 'Chocolate'),
-  ('Mnj', 'Manjar'),
-  ('Ntl', 'Nutella'),
-  ('S.N','Selva negra'),
-  ('C.P','Crema-Pastelera'),
-  ('3L','3Leches'),
-  ('M.L','Merengue/Lucuma'),
-)
-
-TIPO_CHOICE = (
-  ('M.H', 'Millhojas'),
-  ('Bzch', 'Bizcocho'),
-  ('Ygt', 'Yogurt'),
-  ('Pqq','Panqueque'),
-  ('H.ca','Hojarasca'),
-  ('Hlds','Heladas'),
-  ('Mrg','Merengue'),
-)
-
-MEDIDA_CHOICE = (
-	('Gr','Gramos'),
-	('Cc', 'Centimetro cubico'),
-	)
-
-SABOR_DEFAULT = 'S.N'
-TIPO_DEFAULT = 'Bzch'
-MEDIDA_DEFAULT = 'Gr'
+from core.defines import *
+from django.contrib.auth.models import User
 
 
 class Stock(models.Model):
 	medida = models.CharField(
-				max_length=12,
+				max_length=2,
 				choices= MEDIDA_CHOICE,
 				default= MEDIDA_DEFAULT
 			)
-	cantidad =models.IntegerField()
+	cantidad = models.IntegerField(default=0)
 
 class Materia(models.Model):
-	cod = models.IntegerField()
+	cod = models.CharField(max_length=250)
+	tipo = models.CharField(max_length=2,choices=MATERIA_TIPO_CHOICES,default=MATERIA_TIPO_DEFAULT)
 	nombre = models.CharField(max_length=240)
 	stock = models.ForeignKey(Stock,on_delete=models.CASCADE, blank = True)
 	def __str__(self):
 		return self.nombre
-	
+
 class Cliente(models.Model):
     nombre = models.CharField(max_length=240)
     apellido = models.CharField(max_length=240)
@@ -55,13 +29,9 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nombre
 	
-class Pasteles(models.Model):
+class Pastel(models.Model):
 	nombre = models.CharField(max_length=240)
-	sabor = models.CharField(
-			max_length=10,
-			choices= SABOR_CHOICE,
-			default= SABOR_DEFAULT
-	)
+	sabor = models.ManyToManyField(Materia,default=None,blank=True,null=True)
 	tipo = models.CharField(
 			max_length=10,
 			choices= TIPO_CHOICE,
@@ -90,3 +60,9 @@ class Pedido(models.Model):
 	vegano = models.BooleanField(default=False)
 	celiaco = models.BooleanField(default=False)
 	
+class PerfilUsuario(models.Model):
+	user = models.OneToOneField(User,null=True,blank=True)
+	role = models.CharField(max_length=2,choices=TIPO_USUARIO_CHOICES,default=TIPO_USUARIO_DEFAULT)
+	rut = models.IntegerField()
+	dv = models.CharField()
+	fecha_creacion = models.DateTimeField(default=timezone.now)
