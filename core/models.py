@@ -3,7 +3,8 @@ from datetime import date
 from django.db import models
 from core.defines import *
 from django.contrib.auth.models import User
-
+from django.db.models.signals import m2m_changed
+from django.core.exceptions import ValidationError
 
 class Stock(models.Model):
 	medida = models.CharField(
@@ -13,7 +14,7 @@ class Stock(models.Model):
 			)
 	cantidad = models.IntegerField(default=0)
 
-class Materia(models.Model):
+class Material(models.Model):
 	cod = models.CharField(max_length=250)
 	tipo = models.CharField(max_length=2,choices=MATERIA_TIPO_CHOICES,default=MATERIA_TIPO_DEFAULT)
 	nombre = models.CharField(max_length=240)
@@ -31,38 +32,52 @@ class Cliente(models.Model):
 	
 class Pastel(models.Model):
 	nombre = models.CharField(max_length=240)
-	sabor = models.ManyToManyField(Materia,default=None,blank=True,null=True)
-	tipo = models.CharField(
-			max_length=10,
-			choices= TIPO_CHOICE,
-			default= TIPO_DEFAULT
-	)
+	capas = models.ManyToManyField("CapaPastel",related_name="capas_pastel",blank=True)
+	base = models.ForeignKey("BasePastel",null=True,default=None,on_delete=models.CASCADE)
 	vegano = models.BooleanField(default=False)
 	celiaco = models.BooleanField(default=False)
 	def __str__(self):
 		return self.nombre
 
+
+class CantReceta(models.Model):
+	ingrediente = models.ForeignKey(Material,null=True,on_delete=models.SET_NULL)
+	medida = models.CharField(
+				max_length=2,
+				choices=MEDIDA_CHOICE,
+				default=MEDIDA_DEFAULT
+			)
+	cantidad = models.IntegerField(default=0)
+
+class BasePastel(models.Model):
+	nombre = models.CharField(max_length=500,null=True,blank=True)
+	receta = models.ManyToManyField(CantReceta,blank=True)
+
 class Pedido(models.Model):
 	fecha_pedido = models.DateField(default=date.today)
 	fecha_entrega = models.DateField()
 	cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE, blank = True)
-	materia = models.ManyToManyField(Materia,blank = True)
-	sabor = models.CharField(
-			max_length=10,
-			choices= SABOR_CHOICE,
-			default= SABOR_DEFAULT
-		)
-	tipo = models.CharField(
-			max_length=10,
-			choices= TIPO_CHOICE,
-			default= TIPO_DEFAULT
-		)
+	personas = models.IntegerField(default=20)
+	capas = models.ForeignKey("CapaPastel",null=True,default=None,on_delete=models.CASCADE)
+	base = models.ForeignKey(BasePastel,null=True,default=None,on_delete=models.CASCADE)
 	vegano = models.BooleanField(default=False)
 	celiaco = models.BooleanField(default=False)
-	
+
+class CapaPastel(models.Model):
+	pastel = models.ForeignKey(Pedido,default=None,on_delete=models.CASCADE)
+	crema = models.CharField(max_length=2,choices=CREMA_CHOICES,default=CREMA_DEFAULT)
+	ingredientes = models.ManyToManyField(Material,blank=True)
+
 class PerfilUsuario(models.Model):
-	user = models.OneToOneField(User,null=True,blank=True)
+	user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)
 	role = models.CharField(max_length=2,choices=TIPO_USUARIO_CHOICES,default=TIPO_USUARIO_DEFAULT)
 	rut = models.IntegerField()
-	dv = models.CharField()
+	dv = models.CharField(max_length=1,default="")
 	fecha_creacion = models.DateTimeField(default=timezone.now)
+
+def regions_changed(sender, **kwargs):
+    if kwargs['instance'].ingredientes.count() > 3:
+        raise ValidationError("You can't assign more than three regions")
+
+
+m2m_changed.connect(regions_changed, sender=CapaPastel.ingredientes.through)
