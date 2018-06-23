@@ -12,6 +12,9 @@
 			<li id="te_list" class="nav-item dropdown">
 				<a class="nav-link" href="{% url 'index' %}">Mis Pedidos</a>
 			</li>
+			<li id="te_list" class="nav-item dropdown">
+				<a class="nav-link" href="{% url 'new_bake' %}">Nuevo Pedido</a>
+			</li> 
 			{% if request.user.is_staff %}
 			<li id="en_list" class="nav-item dropdown">
 				<a class="nav-link" href="{% url 'index' %}">Administración</a>
