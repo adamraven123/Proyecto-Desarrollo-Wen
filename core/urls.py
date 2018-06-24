@@ -4,5 +4,5 @@ from core import views
 
 urlpatterns = [
 	path('',views.index, name = "index"),
-	path('new_bake/',views.create_bake, name = "new_bake"),
+	path('add_stock/',views.ingresar_stock, name = "add_stock"),
 ]

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.models import *
+from .forms import MaterialForm
 # Create your views here.
 
 def index(request):
@@ -8,7 +9,13 @@ def index(request):
 	template_name = 'index.html'
 	return render(request,template_name,data)
 
-def create_bake(request):
+def ingresar_stock(request):
 	data = {}
-	template_name = 'create_bake.html'
+	if request.method == "POST":
+		data['form'] = MaterialForm(request.POST)
+		if data['form'].is_valid():
+			data ['form'].save()
+	else:
+		data['form'] = MaterialForm()
+	template_name = 'ingresar_stock.html'
 	return render(request,template_name,data)
