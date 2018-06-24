@@ -26,7 +26,7 @@ def auth_login(request):
                 print("IS ACTIVE")
                 login(request, user)
                 print("Pase el login")
-                return HttpResponseRedirect(reverse('player_list'))
+                return HttpResponseRedirect(reverse('index'))
             else:
                 print("usuario o contraseña no validos")
                 messages.warning(
@@ -44,4 +44,4 @@ def auth_login(request):
 
 def auth_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('player_list'))
+    return HttpResponseRedirect(reverse('index'))
