@@ -31,7 +31,7 @@ class Cliente(models.Model):
 	
 class Pastel(models.Model):
 	nombre = models.CharField(max_length=240)
-	sabor = models.ManyToManyField(Materia,default=None,blank=True,null=True)
+	sabor = models.ManyToManyField(Materia,default=None,blank=True)
 	tipo = models.CharField(
 			max_length=10,
 			choices= TIPO_CHOICE,
