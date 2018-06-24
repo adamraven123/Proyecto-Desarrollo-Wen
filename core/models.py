@@ -61,8 +61,8 @@ class Pedido(models.Model):
 	celiaco = models.BooleanField(default=False)
 	
 class PerfilUsuario(models.Model):
-	user = models.OneToOneField(User,null=True,blank=True)
+	user = models.OneToOneField(User,null=True,blank=True,on_delete= models.CASCADE)
 	role = models.CharField(max_length=2,choices=TIPO_USUARIO_CHOICES,default=TIPO_USUARIO_DEFAULT)
 	rut = models.IntegerField()
-	dv = models.CharField()
+	dv = models.CharField(max_length=1, default="")
 	fecha_creacion = models.DateTimeField(default=timezone.now)
