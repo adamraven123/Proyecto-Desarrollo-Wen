@@ -53,6 +53,6 @@ class CapaPastelForm(forms.ModelForm):
 class PerfilUsuarioForm(forms.ModelForm):
     class Meta:
         model = PerfilUsuario
-        fields = ['role', 'rut', 'dv', 'fecha_creacion', 'user']
+        fields = ['role', 'rut', 'dv',]
 
 
