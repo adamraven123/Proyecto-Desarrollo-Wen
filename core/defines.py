@@ -1,11 +1,11 @@
-SABOR_CHOICE = (
-    ('CH', 'Chocolate'),
-    ('MJ', 'Manjar'),
+CREMA_CHOICES = (
+    ('CC', 'Crema de chocolate'),
+    ('CB', 'Crema batida'),
     ('NL', 'Nutella'),
-    ('SN', 'Selva negra'),
+    ('MJ', 'Manjar'),
     ('CP', 'Crema Pastelera'),
-    ('TL', 'Tres Leches'),
-    ('ML', 'Merengue Lucuma'),
+    ('CM', 'Crema de Mantequilla'),
+    ('ME', 'Merengue'),
 )
 
 TIPO_USUARIO_CHOICES = (
@@ -36,6 +36,6 @@ MATERIA_TIPO_CHOICES = (
 
 SABOR_DEFAULT = 'SN'
 MATERIA_TIPO_DEFAULT = 'MP'
-TIPO_DEFAULT = 'BC'
+CREMA_DEFAULT = 'CB'
 TIPO_USUARIO_DEFAULT = 'VE'
 MEDIDA_DEFAULT = 'GR'
