@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pasteles_auth.apps.Pasteles_AuthConfig'
+    'pasteles_auth.apps.Pasteles_AuthConfig',
+    'bootstrap4'
+
 ]
 
 MIDDLEWARE = [
