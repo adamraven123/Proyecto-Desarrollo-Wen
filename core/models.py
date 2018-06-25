@@ -33,6 +33,7 @@ class Cliente(models.Model):
 	
 class Pastel(models.Model):
 	nombre = models.CharField(max_length=240)
+
 	capas = models.ManyToManyField("CapaPastel",related_name="capas_pastel",blank=True)
 	base = models.ForeignKey("BasePastel",null=True,default=None,on_delete=models.CASCADE)
 	vegano = models.BooleanField(default=False)
@@ -65,7 +66,6 @@ class Pedido(models.Model):
 	celiaco = models.BooleanField(default=False)
 
 class CapaPastel(models.Model):
-	pastel = models.ForeignKey(Pedido,default=None,on_delete=models.CASCADE)
 	crema = models.CharField(max_length=2,choices=CREMA_CHOICES,default=CREMA_DEFAULT)
 	ingredientes = models.ManyToManyField(Material,blank=True)
 
