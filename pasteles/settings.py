@@ -32,15 +32,15 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 	'core.apps.CoreConfig',
-    'pasteles_auth.apps.Pasteles_AuthConfig'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'pasteles_auth.apps.Pasteles_AuthConfig',
     'bootstrap4'
+
 ]
 
 MIDDLEWARE = [
