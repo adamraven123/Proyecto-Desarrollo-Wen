@@ -3,7 +3,6 @@ from django import forms
 from .models import Stock, Material, Cliente, Pastel, CantReceta, BasePastel, Pedido, CapaPastel, PerfilUsuario
 
 class StockAdminForm(forms.ModelForm):
-
     class Meta:
         model = Stock
         fields = '__all__'
@@ -135,3 +134,4 @@ class PerfilUsuarioAdmin(admin.ModelAdmin):
     readonly_fields = ['role', 'rut', 'dv', 'fecha_creacion']
 
 admin.site.register(PerfilUsuario, PerfilUsuarioAdmin)
+

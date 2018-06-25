@@ -70,6 +70,7 @@ class CapaPastel(models.Model):
 	ingredientes = models.ManyToManyField(Material,blank=True)
 
 class PerfilUsuario(models.Model):
+
 	user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)
 	role = models.CharField(max_length=2,choices=TIPO_USUARIO_CHOICES,default=TIPO_USUARIO_DEFAULT)
 	rut = models.IntegerField()
