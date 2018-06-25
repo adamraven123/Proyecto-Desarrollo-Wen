@@ -3,14 +3,6 @@ from django import forms
 from .models import Stock, Material, Cliente, Pastel, CantReceta, BasePastel, Pedido, CapaPastel, PerfilUsuario
 
 class StockAdminForm(forms.ModelForm):
-
-
-admin.site.register(Stock)
-admin.site.register(Materia)
-admin.site.register(Cliente)
-admin.site.register(Pastel)
-admin.site.register(Pedido)
-
     class Meta:
         model = Stock
         fields = '__all__'
