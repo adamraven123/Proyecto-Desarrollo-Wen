@@ -18,7 +18,7 @@ class Material(models.Model):
 	cod = models.CharField(max_length=250)
 	tipo = models.CharField(max_length=2,choices=MATERIA_TIPO_CHOICES,default=MATERIA_TIPO_DEFAULT)
 	nombre = models.CharField(max_length=240)
-	stock = models.ForeignKey(Stock,on_delete=models.CASCADE, blank = True)
+	stock = models.OneToOneField(Stock,on_delete=models.CASCADE, blank = True)
 	def __str__(self):
 		return self.nombre
 
