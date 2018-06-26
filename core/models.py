@@ -23,6 +23,7 @@ class Material(models.Model):
 	stock = models.OneToOneField(Stock,on_delete=models.CASCADE, blank = True)
 	def __str__(self):
 		return self.nombre
+		
 	def total(self):
 		return '{} {}' . format(self.stock.cantidad, self.stock.medida)
 

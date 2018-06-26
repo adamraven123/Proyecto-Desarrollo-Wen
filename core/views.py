@@ -22,10 +22,11 @@ def ingresar_stock(request):
 		mater.stock.save()
 		mater.save()
 		select = "#cant_"+str(mater.pk)
-		cant = mater.total
+		cant = mater.total()
 		data = {
 			"cant":cant,
 			'select':select}
+		print ("DATA ", data)
 		return JsonResponse(data)
 	else:
 		material = Material.objects.all()
