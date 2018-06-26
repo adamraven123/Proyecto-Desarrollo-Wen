@@ -11,7 +11,7 @@ class StockForm(forms.ModelForm):
 class MaterialForm(forms.ModelForm):
     class Meta:
         model = Material
-        fields = ['cod', 'tipo', 'nombre', 'stock']
+        fields = ['tipo', 'nombre', 'stock']
 
 
 class ClienteForm(forms.ModelForm):
