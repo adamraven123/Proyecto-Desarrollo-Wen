@@ -15,13 +15,17 @@
 					<h5 class="card-title">Stock de Materiales en sistema.</h5>
 						</div>
 						<div class="col">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalStock">
 			  		Ingresar Stock</button>
+			  					<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AgregarMaterial">
+						  Agregar Material
+						</button>
 						</div>
 					</div>
 					<!-- Button trigger modal -->
 					<p class="card-text"></p>
-					<table class="table table-bordered">
+					<table class="table table-bordered" id="tabla1">
 					    <thead>
 					        <tr>
 					            <th>Nombre</th>
@@ -30,7 +34,7 @@
 					            <th>Stock</th>
 					        </tr>
 					    </thead>
-					    <tbody>
+					    <tbody id="tbody">
 					        {% for material in materiales %}
 					        <tr>
 					            <td>{{ material.nombre }}</td>
@@ -44,7 +48,6 @@
 					<a type="submit" value="Enviar" id="hola" class="btn btn-primary text-white">Enviar</a>	
 				</div>
 			</div>
-			
 		</div>
 	</div>	
 </div>
@@ -52,11 +55,11 @@
 	<div class="row">
 		<div class="col">
 			<!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="ModalStock" tabindex="-1" role="dialog" aria-labelledby="ModalStockLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">{{titulo}}</h5>
+			        <h5 class="modal-title" id="ModalStockLabel">{{titulo}}</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
@@ -83,7 +86,67 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<a type="submit" value="Enviar" id="enviar" class="btn btn-primary text-white">Enviar</a>
+					<a type="submit" value="Enviar" id="enviar" class="btn btn-primary text-white"  data-dismiss="modal">Enviar</a>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+			
+
+			<!-- Modal -->
+			<div class="modal fade" id="AgregarMaterial" tabindex="-1" role="dialog" aria-labelledby="AgregarMaterialLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="AgregarMaterialLabel">Agregar Material</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+						<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+							<div class="form-group row">
+								<label class="col-md-3 col-form-label" for="id_codigo">Codigo:</label>
+								<div class="col-md-9">
+			  						<input type="text" class="form-control" name="codigo" id="id_codigo" required="">
+			  					</div>
+			  				</div>
+							<div class="form-group row">
+								<label class="col-md-3 col-form-label" for="id_nombre">Nombre:</label>
+								<div class="col-md-9">
+			  						<input type="text" class="form-control" name="nombre" id="id_nombre" required="">
+			  					</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-md-3 col-form-label" for="id_tipo">Tipo:</label>
+								<div class="col-md-9">
+									<select name="material" class="form-control" id="id_tipo" title="" required="">
+									<option value="MP">Materia Prima</option>
+									<option value="IT">Ingredientes de Torta</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-md-3 col-form-label" for="id_medida">Medida:</label>
+								<div class="col-md-9">
+									<select name="material" class="form-control" id="id_medida" title="" required="">
+									<option value="GR">Gramos</option>
+									<option value="CC">Centimetros Cubicos</option>
+									</select>
+								</div>
+							</div>
+						</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<a type="submit" value="Enviar" id="enviar2" class="btn btn-primary text-white"  data-dismiss="modal">Enviar</a>
 			      </div>
 			    </div>
 			  </div>
@@ -122,15 +185,41 @@
                 success: function(response){
                     swal("Exito!","Todo bien por aca.","success");
                     $("#enviar").html(response.mensaje);
-                    $(response.select).html(response.cant)
-            		console.log(response.select)
+                    $(response.select).html(response.cant);
                 },
                 error: function(){
                     swal("Error!","Salio todo mal.","warning");
                 },
 
             });
-            console.log(data);
+        });
+     	$("#enviar2").click(function(){
+            var codigo = $('#id_codigo').val();
+            var nombre = $('#id_nombre').val();
+            var tipo = $('#id_tipo').val();
+            var medida = $('#id_medida').val();
+            var data = {
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                codigo: codigo,
+                nombre: nombre,
+                tipo: tipo,
+                medida: medida,
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'add_material' %}",
+                data: data,
+                success: function(response){
+                    swal("Exito!","Todo bien por aca.","success");
+                    $("#tbody").append(response.html);
+                },
+                error: function(){
+                    swal("Error!","Salio todo mal.","warning");
+                },
+            });
+                console.log(data)
+
         });
     });
 </script>

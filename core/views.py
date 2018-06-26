@@ -38,6 +38,36 @@ def ingresar_stock(request):
 	template_name = 'ingresar_stock.html'
 	return render(request, template_name, data)
 
+def crearMaterial(request):
+	data = {}
+	if request.method == "POST":
+		medida = request.POST["medida"]
+		tipo = request.POST["tipo"]
+		nombre = request.POST["nombre"]
+		codigo = request.POST["codigo"]
+		stock = Stock.objects.create(
+			medida = medida,
+			cantidad = 0,
+			)
+		stock.save()
+		mater = Material.objects.create(
+			cod = medida,
+			tipo = tipo,
+			nombre = nombre,
+			stock= stock,
+			)
+		mater.save()
+		html = "<tr>\
+					<td>%s</td>\
+					<td>%s</td>\
+					<td>%s</td>\
+					<td>%s</td>\
+		</tr>" %(nombre,codigo,tipo,stock)
+		data = {
+			"html":html,
+		}
+	return JsonResponse(data)
+
 def admin_usuario(request):
 	data = {}
 	if request.method == "POST":
