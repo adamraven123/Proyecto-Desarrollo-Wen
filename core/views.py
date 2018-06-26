@@ -29,3 +29,9 @@ def admin_usuario(request):
 		data['users'] = PerfilUsuario.objects.all()
 		template_name = 'perfil_usuario/admin_usuarios.html'
 		return render(request,template_name,data)
+def pedidos(request):
+	data = {}
+	data['inicio'] = 'Bienvenidos'
+	template_name = 'pedi_clie.html'
+	return render(request,template_name,data)
+

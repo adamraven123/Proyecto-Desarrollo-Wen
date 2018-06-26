@@ -33,9 +33,15 @@ class Cliente(models.Model):
 	
 class Pastel(models.Model):
 	nombre = models.CharField(max_length=240)
+	cover = models.CharField(
+		max_length=2,
+		choices=COVER_CHOICE,
+		default=COVER_DEFAULT
+	)
 	capas = models.ManyToManyField("CapaPastel",related_name="capas_pastel",blank=True)
 	base = models.ForeignKey("BasePastel",null=True,default=None,on_delete=models.CASCADE)
 	vegano = models.BooleanField(default=False)
+	image = models.ImageField(upload_to='pasteles',default=None)
 	celiaco = models.BooleanField(default=False)
 	def __str__(self):
 		return self.nombre
@@ -57,6 +63,11 @@ class BasePastel(models.Model):
 class Pedido(models.Model):
 	fecha_pedido = models.DateField(default=date.today)
 	fecha_entrega = models.DateField()
+	cover = models.CharField(
+			max_length=2,
+			choices=COVER_CHOICE,
+			default=COVER_DEFAULT
+		)	
 	cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE, blank = True)
 	personas = models.IntegerField(default=20)
 	capas = models.ForeignKey("CapaPastel",null=True,default=None,on_delete=models.CASCADE)
