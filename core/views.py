@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.models import *
+from django.http import JsonResponse
 from .forms import MaterialForm
 # Create your views here.
 
@@ -25,3 +26,4 @@ def ingresar_stock(request):
 	data["titulo"] = "Agregar "
 	template_name = 'ingresar_stock.html'
 	return render(request, template_name, data)
+
