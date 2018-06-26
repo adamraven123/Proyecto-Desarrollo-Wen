@@ -13,13 +13,60 @@ def index(request):
 def ingresar_stock(request):
 	data = {}
 	if request.method == "POST":
-		data['form'] = MaterialForm(request.POST)
-		if data['form'].is_valid():
-			data ['form'].save()
+		mater = request.POST["material"]
+		cantidad = request.POST["cantidad"]
+		mater = Material.objects.get(pk=int(mater))
+		print (mater.nombre)
+		mater.stock.cantidad += int(cantidad)
+		print (mater.stock.cantidad)
+		mater.stock.save()
+		mater.save()
+		select = "#cant_"+str(mater.pk)
+		cant = mater.total()
+		data = {
+			"cant":cant,
+			'select':select}
+		print ("DATA ", data)
+		return JsonResponse(data)
 	else:
-		data['form'] = MaterialForm()
+		material = Material.objects.all()
+		stock = Stock.objects.all()
+		data["materiales"] = material
+	
+	data["titulo"] = "Agregar Stock"
+	data["tabla"] = "Tabla de Materiales"
 	template_name = 'ingresar_stock.html'
-	return render(request,template_name,data)
+	return render(request, template_name, data)
+
+def crearMaterial(request):
+	data = {}
+	if request.method == "POST":
+		medida = request.POST["medida"]
+		tipo = request.POST["tipo"]
+		nombre = request.POST["nombre"]
+		codigo = request.POST["codigo"]
+		stock = Stock.objects.create(
+			medida = medida,
+			cantidad = 0,
+			)
+		stock.save()
+		mater = Material.objects.create(
+			cod = medida,
+			tipo = tipo,
+			nombre = nombre,
+			stock= stock,
+			)
+		mater.save()
+		html = "<tr>\
+					<td>%s</td>\
+					<td>%s</td>\
+					<td>%s</td>\
+					<td>%s</td>\
+		</tr>" %(nombre,codigo,tipo,stock)
+		data = {
+			"html":html,
+		}
+	return JsonResponse(data)
 
 def admin_usuario(request):
 	data = {}
@@ -75,4 +122,5 @@ def pedidos(request):
 	data['inicio'] = 'Bienvenidos'
 	template_name = 'pedi_clie.html'
 	return render(request,template_name,data)
+
 

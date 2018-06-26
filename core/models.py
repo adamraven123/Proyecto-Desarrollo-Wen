@@ -14,7 +14,7 @@ class Stock(models.Model):
 			)
 	cantidad = models.IntegerField(default=0)
 	def __str__(self):
-		return self.cantidad + " " + self.medida 
+		return str(self.cantidad) + " " + self.medida 
 
 class Material(models.Model):
 	cod = models.CharField(max_length=250)
@@ -23,6 +23,9 @@ class Material(models.Model):
 	stock = models.OneToOneField(Stock,on_delete=models.CASCADE, blank = True)
 	def __str__(self):
 		return self.nombre
+		
+	def total(self):
+		return '{} {}' . format(self.stock.cantidad, self.stock.medida)
 
 class Cliente(models.Model):
 	userprofile = models.ForeignKey('PerfilUsuario',null=True,default=None,on_delete=models.SET_NULL)
