@@ -61,7 +61,7 @@ def crearMaterial(request):
 					<td>%s</td>\
 					<td>%s</td>\
 					<td>%s</td>\
-		</tr>" %(nombre,codigo,tipo,stock)
+		</tr>" %(nombre,mater.pk,tipo,stock)
 		data = {
 			"html":html,
 		}
