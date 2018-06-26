@@ -20,3 +20,12 @@ def ingresar_stock(request):
 		data['form'] = MaterialForm()
 	template_name = 'ingresar_stock.html'
 	return render(request,template_name,data)
+
+def admin_usuario(request):
+	data = {}
+	if request.method == "POST":
+		pass
+	else:
+		data['users'] = PerfilUsuario.objects.all()
+		template_name = 'perfil_usuario/admin_usuarios.html'
+		return render(request,template_name,data)
