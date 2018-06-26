@@ -34,8 +34,17 @@ MATERIA_TIPO_CHOICES = (
     ('IT', 'Ingrediente de Torta'),
 )
 
+COVER_CHOICE = (
+    ('FT', 'Fondant'),
+    ('CR', 'Crema'),
+    ('CH', 'Chocolate'),
+    ('MR', 'Mermelada'),
+)
+
+
 SABOR_DEFAULT = 'SN'
 MATERIA_TIPO_DEFAULT = 'MP'
 CREMA_DEFAULT = 'CB'
 TIPO_USUARIO_DEFAULT = 'VE'
 MEDIDA_DEFAULT = 'GR'
+COVER_DEFAULT = 'CR'
