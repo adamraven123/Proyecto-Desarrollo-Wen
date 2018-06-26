@@ -114,6 +114,7 @@ def admin_pastel(request):
 		return JsonResponse({'mensaje':'El usuario ha sido creado con éxito. \n La contraseña es una combinación de su primer y su dígito verificador.'})
 	else:
 		data['pasteles'] = Pastel.objects.all()
+		data['materiales'] = Material.objects.filter(tipo="MP").all()
 		template_name = 'pastel/admin_pastel.html'
 		return render(request,template_name,data)
 
@@ -123,4 +124,25 @@ def pedidos(request):
 	template_name = 'pedi_clie.html'
 	return render(request,template_name,data)
 
+def create_base(request):
+	name = request.POST['nombre_input']
+	n_base = BasePastel.objects.create(
+		nombre = name
+	)
+	n_base.save()
+	i = 0
+	while i < 200:
+		try:
+			ing_pk = request.POST['ing_'+str(i)]
+			ingrediente = Material.objects.get(pk=ing_pk)
+			cantidad = request.POST['cant_'+str(i)]
+			receta = CantReceta.objects.create(
+				ingrediente = ingrediente,
+				cantidad = cantidad
+			)
+			receta.save()
+			n_base.receta.add(receta)
+		except IndexError:
+			break
 
+	return JsonResponse({"mensaje":"ok"})

@@ -64,13 +64,7 @@ class Pastel(models.Model):
 
 class CantReceta(models.Model):
 	ingrediente = models.ForeignKey(Material,null=True,on_delete=models.SET_NULL)
-	medida = models.CharField(
-				max_length=2,
-				choices=MEDIDA_CHOICE,
-				default=MEDIDA_DEFAULT
-			)
 	cantidad = models.IntegerField(default=0)
-	
 	def cantidad_total(self):
 		return '{} {}'.format(self.cantidad, self.medida)
 
