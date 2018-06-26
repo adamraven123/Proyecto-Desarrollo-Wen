@@ -110,7 +110,8 @@ def admin_usuario(request):
 
 def pedidos(request):
 	data = {}
-	data['inicio'] = 'Bienvenidos'
+	
+	data['objet_list'] = Pastel.objects.all()
 	template_name = 'pedi_clie.html'
 	return render(request,template_name,data)
 
