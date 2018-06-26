@@ -11,7 +11,7 @@
 			<hr>		
 			<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 				<div class="form-group row">
-					<label class="col-md-3 col-form-label" for="id_match">Material</label>
+					<label class="col-md-3 col-form-label" for="id_material">Material</label>
 					<div class="col-md-9">
 						<select name="material" class="form-control" id="id_material" title="" required="">
 							{% for material in materiales %}
@@ -21,15 +21,9 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-md-3 col-form-label" for="cantidad">Cantidad:</label>
+					<label class="col-md-3 col-form-label" for="id_cantidad">Cantidad:</label>
 					<div class="col-md-9">
-  					<input type="number" class="form-control" id="cantidad">
-  					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-md-3 col-form-label" for="medida">Medida:</label>
-					<div class="col-md-9">
-					<label class="col-md-3 col-form-label" for="medida">{{stock.medida}}</label>
+  						<input type="number" class="form-control" name="cantidad" id="id_cantidad" required="">
   					</div>
 				</div>
 				<input type="submit" value="Enviar" class="btn btn-primary btn-lg btn-block">
