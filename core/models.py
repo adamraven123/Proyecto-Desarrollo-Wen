@@ -13,6 +13,8 @@ class Stock(models.Model):
 				default= MEDIDA_DEFAULT
 			)
 	cantidad = models.IntegerField(default=0)
+	def __str__(self):
+		return self.cantidad + " " + self.medida 
 
 class Material(models.Model):
 	cod = models.CharField(max_length=250)

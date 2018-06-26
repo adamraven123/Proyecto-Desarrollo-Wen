@@ -11,7 +11,6 @@ class StockAdminForm(forms.ModelForm):
 class StockAdmin(admin.ModelAdmin):
     form = StockAdminForm
     list_display = ['cantidad']
-    readonly_fields = ['cantidad']
 
 admin.site.register(Stock, StockAdmin)
 
@@ -26,7 +25,6 @@ class MaterialAdminForm(forms.ModelForm):
 class MaterialAdmin(admin.ModelAdmin):
     form = MaterialAdminForm
     list_display = ['cod', 'tipo', 'nombre']
-    readonly_fields = ['cod', 'tipo', 'nombre']
 
 admin.site.register(Material, MaterialAdmin)
 
@@ -41,7 +39,6 @@ class ClienteAdminForm(forms.ModelForm):
 class ClienteAdmin(admin.ModelAdmin):
     form = ClienteAdminForm
     list_display = ['nombre', 'apellido', 'rut', 'mail']
-    readonly_fields = ['nombre', 'apellido', 'rut', 'mail']
 
 admin.site.register(Cliente, ClienteAdmin)
 
@@ -56,7 +53,6 @@ class PastelAdminForm(forms.ModelForm):
 class PastelAdmin(admin.ModelAdmin):
     form = PastelAdminForm
     list_display = ['nombre', 'vegano', 'celiaco']
-    readonly_fields = ['nombre', 'vegano', 'celiaco']
 
 admin.site.register(Pastel, PastelAdmin)
 
@@ -71,7 +67,6 @@ class CantRecetaAdminForm(forms.ModelForm):
 class CantRecetaAdmin(admin.ModelAdmin):
     form = CantRecetaAdminForm
     list_display = ['medida']
-    readonly_fields = ['medida']
 
 admin.site.register(CantReceta, CantRecetaAdmin)
 
@@ -86,7 +81,6 @@ class BasePastelAdminForm(forms.ModelForm):
 class BasePastelAdmin(admin.ModelAdmin):
     form = BasePastelAdminForm
     list_display = ['nombre']
-    readonly_fields = ['nombre']
 
 admin.site.register(BasePastel, BasePastelAdmin)
 
@@ -101,7 +95,6 @@ class PedidoAdminForm(forms.ModelForm):
 class PedidoAdmin(admin.ModelAdmin):
     form = PedidoAdminForm
     list_display = ['fecha_pedido', 'fecha_entrega', 'personas', 'vegano', 'celiaco']
-    readonly_fields = ['fecha_pedido', 'fecha_entrega', 'personas', 'vegano', 'celiaco']
 
 admin.site.register(Pedido, PedidoAdmin)
 
@@ -116,7 +109,6 @@ class CapaPastelAdminForm(forms.ModelForm):
 class CapaPastelAdmin(admin.ModelAdmin):
     form = CapaPastelAdminForm
     list_display = ['crema']
-    readonly_fields = ['crema']
 
 admin.site.register(CapaPastel, CapaPastelAdmin)
 
@@ -131,7 +123,6 @@ class PerfilUsuarioAdminForm(forms.ModelForm):
 class PerfilUsuarioAdmin(admin.ModelAdmin):
     form = PerfilUsuarioAdminForm
     list_display = ['role', 'rut', 'dv', 'fecha_creacion']
-    readonly_fields = ['role', 'rut', 'dv', 'fecha_creacion']
 
 admin.site.register(PerfilUsuario, PerfilUsuarioAdmin)
 
