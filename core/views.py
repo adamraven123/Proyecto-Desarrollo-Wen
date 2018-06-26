@@ -12,10 +12,16 @@ def index(request):
 def ingresar_stock(request):
 	data = {}
 	if request.method == "POST":
-		data['form'] = MaterialForm(request.POST)
-		if data['form'].is_valid():
-			data ['form'].save()
+		mater = request.POST["material"]
+		mater = Material.objects.get(pk=int(mater))
+		stocke = Stock.objects.filter(pk=mater.stock.pk)
+		
+
 	else:
-		data['form'] = MaterialForm()
+		material = Material.objects.all()
+		stock = Stock.objects.filter()
+		data["materiales"] = material
+	
+	data["titulo"] = "Agregar "
 	template_name = 'ingresar_stock.html'
-	return render(request,template_name,data)
+	return render(request, template_name, data)
