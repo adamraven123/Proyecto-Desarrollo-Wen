@@ -14,21 +14,23 @@ class Stock(models.Model):
 			)
 	cantidad = models.IntegerField(default=0)
 	def __str__(self):
-		return str(self.cantidad) + " " + self.medida
+		return str(self.cantidad) + " " + self.medida 
+
 
 class Material(models.Model):
-	cod = models.CharField(max_length=250)
 	tipo = models.CharField(max_length=2,choices=MATERIA_TIPO_CHOICES,default=MATERIA_TIPO_DEFAULT)
 	nombre = models.CharField(max_length=240)
 	stock = models.OneToOneField(Stock,on_delete=models.CASCADE, blank = True)
 	def __str__(self):
 		return self.nombre
+		
+	def total(self):
+		return '{} {}' . format(self.stock.cantidad, self.stock.medida)
 
 class Cliente(models.Model):
 	userprofile = models.ForeignKey('PerfilUsuario',null=True,default=None,on_delete=models.SET_NULL)
 	nombre = models.CharField(max_length=240)
 	apellido = models.CharField(max_length=240)
-	rut = models.CharField(max_length=240)
 	mail = models.CharField(max_length=240)
 	def __str__(self):
 		return self.nombre

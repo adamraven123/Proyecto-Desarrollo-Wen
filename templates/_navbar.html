@@ -12,9 +12,6 @@
 			<li id="te_list" class="nav-item dropdown">
 				<a class="nav-link" href="{% url 'index' %}">Mis Pedidos</a>
 			</li>
-			<li id="te_list" class="nav-item dropdown">
-				<a class="nav-link" href="{% url 'add_stock' %}">Agregar Stock</a>
-			</li> 
 			{% if request.user.is_staff %}
 			<li id="en_list" class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administración</a>
@@ -22,6 +19,7 @@
 					<a class="dropdown-item" href="{% url 'admin_usuario' %}">Usuarios</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#">Pasteles</a>
+					<a class="dropdown-item" href="{% url 'add_stock' %}">Agregar Stock</a>
 				</div>
 			</li>
 			{% endif %}

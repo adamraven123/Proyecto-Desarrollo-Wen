@@ -24,7 +24,7 @@ class MaterialAdminForm(forms.ModelForm):
 
 class MaterialAdmin(admin.ModelAdmin):
     form = MaterialAdminForm
-    list_display = ['cod', 'tipo', 'nombre']
+    list_display = ['tipo', 'nombre']
 
 admin.site.register(Material, MaterialAdmin)
 
@@ -38,7 +38,7 @@ class ClienteAdminForm(forms.ModelForm):
 
 class ClienteAdmin(admin.ModelAdmin):
     form = ClienteAdminForm
-    list_display = ['nombre', 'apellido', 'rut', 'mail']
+    list_display = ['nombre', 'apellido', 'mail']
 
 admin.site.register(Cliente, ClienteAdmin)
 

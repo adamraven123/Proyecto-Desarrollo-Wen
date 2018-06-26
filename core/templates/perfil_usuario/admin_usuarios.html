@@ -31,6 +31,7 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Rut</th>
                                 <th scope="col">Correo</th>
+                                <th scope="col">Rol</th>
                                 <th scope="col">Fecha de Registro</th>
                                 <th scope="col">Acciones</th>
                             </tr>
@@ -41,6 +42,19 @@
                                 <td>{{user.user.first_name}} {{user.user.last_name}}</th>
                                 <td>{{user.rut}}-{{user.dv}}</td>
                                 <td>{{user.user.email}}</td>
+                                {% if user.role == "CO" %}
+                                <td>
+                                    <span class="badge badge-info">Cliente</span>
+                                </td>
+                                {% elif user.role == "AD" %}
+                                <td>
+                                    <span class="badge badge-warning">Administrador</span>
+                                </td>
+                                {% else %}
+                                <td>
+                                    <span class="badge badge-success">Vendedor</span>
+                                </td>
+                                {% endif %}
                                 <td>{{user.user.date_joined}}</td>
                                 <td><a class="btn btn-warning editar text-center" data-userpk="{{user.pk}}"><i class="fa fa-edit text-white"></i></a></td>
                             </tr>
@@ -141,7 +155,10 @@
                 url: "{% url 'admin_usuario' %}",
                 data: data,
                 success: function (response) {
-                    swal("Exito!",response.mensaje,'success');
+                    swal("Exito!",response.mensaje,'success')
+                    .then((value) => {
+                        window.location.reload();
+                    });;
                 },
                 error: function () {
                     swal("Error","Algo salío mal, por favor verifique los campos.",'warning');
