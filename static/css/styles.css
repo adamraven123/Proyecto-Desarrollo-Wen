@@ -8,7 +8,9 @@
 .bg-footer{
     background-color:#1b7feb;
 }
-
+body{
+    background-color:rgb(226, 226, 226);
+}
 .card-name{
     color:white;
 }

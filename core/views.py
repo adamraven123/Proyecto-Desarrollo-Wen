@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.models import *
+from django.http import JsonResponse
 from .forms import MaterialForm
 # Create your views here.
 
@@ -25,3 +26,4 @@ def pedidos(request):
 	data['inicio'] = 'Bienvenidos'
 	template_name = 'pedi_clie.html'
 	return render(request,template_name,data)
+
