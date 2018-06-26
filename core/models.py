@@ -14,7 +14,7 @@ class Stock(models.Model):
 			)
 	cantidad = models.IntegerField(default=0)
 	def __str__(self):
-		return self.cantidad + " " + self.medida 
+		return str(self.cantidad) + " " + self.medida
 
 class Material(models.Model):
 	cod = models.CharField(max_length=250)
@@ -57,11 +57,16 @@ class CantReceta(models.Model):
 				default=MEDIDA_DEFAULT
 			)
 	cantidad = models.IntegerField(default=0)
+	def __str__(self):
+		return self.ingrediente.nombre + " " + str(self.cantidad) + " " + self.medida
+	
 
 class BasePastel(models.Model):
 	nombre = models.CharField(max_length=500,null=True,blank=True)
 	receta = models.ManyToManyField(CantReceta,blank=True)
-
+	def __str__(self):
+		return self.nombre
+	
 class Pedido(models.Model):
 	fecha_pedido = models.DateField(default=date.today)
 	fecha_entrega = models.DateField()
@@ -80,6 +85,7 @@ class Pedido(models.Model):
 class CapaPastel(models.Model):
 	crema = models.CharField(max_length=2,choices=CREMA_CHOICES,default=CREMA_DEFAULT)
 	ingredientes = models.ManyToManyField(Material,blank=True)
+
 
 class PerfilUsuario(models.Model):
 

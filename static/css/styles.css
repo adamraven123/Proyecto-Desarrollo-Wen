@@ -1,7 +1,9 @@
 .container{
     margin-top:2%;
 }
-
+.img-pastel{
+	width: 80%; height: auto; 
+}
 .bg-title{
     background-color:#006cdf;
 }

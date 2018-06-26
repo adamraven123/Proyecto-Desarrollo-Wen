@@ -6,6 +6,7 @@ CREMA_CHOICES = (
     ('CP', 'Crema Pastelera'),
     ('CM', 'Crema de Mantequilla'),
     ('ME', 'Merengue'),
+    ('CB', 'Crema batida'),
 )
 
 TIPO_USUARIO_CHOICES = (
@@ -28,6 +29,7 @@ TIPO_CHOICE = (
 MEDIDA_CHOICE = (
     ('GR', 'Gramos'),
     ('CC', 'Centimetro cubico'),
+    ('UN', 'Unidad'),
 )
 MATERIA_TIPO_CHOICES = (
     ('MP', 'Materia Prima'),

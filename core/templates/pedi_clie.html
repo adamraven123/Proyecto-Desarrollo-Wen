@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %} {% load static %}
 <div class="container">
 	<div class="row">
 		<div class="col-12">
@@ -12,7 +12,7 @@
 		<div class="col-12 mt-6">
 			<div class="row">
 				<div style=" " class="col-6 text-center">
-					<a href=" " style=" " class="btn btn-primary btn-lg align-middle"> Predeterminada </a>
+					<a id='about' href="#prefab" class="btn btn-primary btn-lg align-middle"> Predeterminada </a>
 				</div>
 				<div class="col-6 text-center">
 					<a href=" " class="btn btn-success btn-lg align-middle"> Personalizada </a>
@@ -27,30 +27,83 @@
 			</div>
 		</div>
 		<div class="col-12">
-			<div class="row">
+			<div id="prefab" class="row">
 				<div class="col">
 					<div class="card" style="width: 18rem;">
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<img class="card-img-top" src="{% static 'images/milhojas.jpg' %}" alt="Card image cap">
 						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							<a href="#" class="btn btn-primary">Go somewhere</a>
+							<h5 class="card-title">Este es un pastelito </h5>
+							<p class="card-text">esta es la descripcion del pastelito.</p>
+							<a href="#" class="btn btn-primary">quiero este pastelito</a>
 						</div>
 					</div>
 				</div>
 				<div class="col">
 					<div class="card" style="width: 18rem;">
-						<img class="card-img-top" src="..." alt="Card image cap">
+						<img class="card-img-top" src="{% static 'images/selvanegra.jpg' %}" alt="Card image cap">
 						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							<a href="#" class="btn btn-primary">Go somewhere</a>
+							<h5 class="card-title">Esta es otro pastelito</h5>
+							<p class="card-text">esta es la descripcion de este pastelito .</p>
+							<a href="#" class="btn btn-primary">quiero este pastelito</a>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="row">
+				<div class="col-12 text-center">
+					<h1>Tu Pastel, Tus gustos</h1>
+				</div>
+				<div class="col-12">
+					<div class="row">
+						<div class="container col-10">
+							<img class="rounded img-pastel img-fluid" src="{% static 'images/pastel-4.jpg' %}" alt="">
+						</div>
+						<div class="col-2">
+							<div class="dropdown">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">¿Para cuantas personas?</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">20 personas</a>
+									<a class="dropdown-item" href="#">30 personas</a>
+									<a class="dropdown-item" href="#">40 personas</a>
+								</div>
+							</div>
+							<div class="dropdown">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">¿Que base le gustaria?</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">base 1</a>
+									<a class="dropdown-item" href="#">base 2</a>
+									<a class="dropdown-item" href="#">base 3</a>
+								</div>
+							</div>
+							<div class="dropdown">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Ingrediente 1ra capa </button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="#">ingrediente 1</a>
+									<a class="dropdown-item" href="#">ingrediente 2</a>
+									<a class="dropdown-item" href="#">ingrediente 3</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-{% endblock content %}
+{% endblock content %} {% block javascript %}
+<script>
+	$(document).ready(function() {
+		if (window.location.hash == "#prefab") {
+			$('html, body').animate({
+				scrollTop: $("#prefab").offset().top
+			}, 1000);
+		}
+	});
+
+</script>
+
+{% endblock javascript %}
