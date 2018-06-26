@@ -1,14 +1,19 @@
 {% extends "base.html" %}
+{% block css %}
+<link href='https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet'>
+{% endblock css %}
 {% block content %}
 <div class="container">
     <div class="card text-center">
         <div class="card-header">
             <div class="row">
-                <div class="col">
-                    <strong class="card-name align-middle">Haz tu pedido!</strong> 
+                <div class="col ">
+                    <h4>
+                        <strong class="card-name float-sm-left pt-2">Lista de Usuarios</strong> 
+                    </h4>
                 </div>
                 <div class="col">
-                    <ul class="nav nav-pills card-header-pills float-sm-right">
+                    <ul class="nav nav-pills card-header-pills float-sm-right pt-2">
                         <li class="nav-item">
                             <a class="nav-link active bg-success" href="#"> <i class="fa fa-plus"></i> Agregar</a>
                         </li>
@@ -17,39 +22,50 @@
             </div>
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-12 table-responsive-sm">
+                    <table class="table" id="tabla">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td id="cant_{{algo.pk}}">@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 {% endblock content %}
-
+{% block javascript %}
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $('#tabla').DataTable();
+    })
+</script>
+{% endblock javascript %}
