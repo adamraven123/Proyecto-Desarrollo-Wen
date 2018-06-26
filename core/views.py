@@ -32,6 +32,7 @@ def admin_usuario(request):
 			last_name=request.POST['last_name'],
 		)
 		n_user.save()
+		
 		n_perfil = PerfilUsuario.objects.create(
 			user = n_user,
 			role = request.POST["tipo"],
@@ -39,6 +40,22 @@ def admin_usuario(request):
 			dv = request.POST['dv']
 		)
 		n_perfil.save()
+		
+		if request.POST['tipo'] == "CO":
+			if Cliente.objects.filter(mail=request.POST['email']).exists():
+				cliente = Cliente.objects.get(email=request.POST['email'])
+				cliente.userprofile = n_perfil
+				cliente.save()
+			else:
+				n_cliente = Cliente.objects.create(
+					nombre = n_user.first_name,
+					apellido = n_user.last_name,
+					mail = n_user.email
+				)
+				n_cliente.save()
+		elif request.POST['tipo'] == 'AD':
+			n_user.is_staff = True
+			n_user.save()
 		return JsonResponse({'mensaje':'El usuario ha sido creado con éxito. \n La contraseña es una combinación de su primer y su dígito verificador.'})
 	else:
 		data['users'] = PerfilUsuario.objects.all()

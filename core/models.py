@@ -28,7 +28,6 @@ class Cliente(models.Model):
 	userprofile = models.ForeignKey('PerfilUsuario',null=True,default=None,on_delete=models.SET_NULL)
 	nombre = models.CharField(max_length=240)
 	apellido = models.CharField(max_length=240)
-	rut = models.CharField(max_length=240)
 	mail = models.CharField(max_length=240)
 	def __str__(self):
 		return self.nombre

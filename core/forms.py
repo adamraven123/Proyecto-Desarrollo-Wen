@@ -17,7 +17,7 @@ class MaterialForm(forms.ModelForm):
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ['nombre', 'apellido', 'rut', 'mail']
+        fields = ['nombre', 'apellido', 'mail']
 
 
 class PastelForm(forms.ModelForm):

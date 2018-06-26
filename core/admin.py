@@ -38,7 +38,7 @@ class ClienteAdminForm(forms.ModelForm):
 
 class ClienteAdmin(admin.ModelAdmin):
     form = ClienteAdminForm
-    list_display = ['nombre', 'apellido', 'rut', 'mail']
+    list_display = ['nombre', 'apellido', 'mail']
 
 admin.site.register(Cliente, ClienteAdmin)
 
