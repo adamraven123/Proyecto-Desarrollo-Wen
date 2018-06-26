@@ -1,55 +1,153 @@
 {% extends "base.html" %}
+{% block css %}
+<link href='https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock css %}
 {% block content %}
 <div class="container">
     <div class="card text-center">
         <div class="card-header">
             <div class="row">
-                <div class="col">
-                    <strong class="card-name align-middle">Haz tu pedido!</strong> 
+                <div class="col ">
+                    <h4>
+                        <strong class="card-name float-sm-left pt-2">Lista de Usuarios</strong> 
+                    </h4>
                 </div>
                 <div class="col">
-                    <ul class="nav nav-pills card-header-pills float-sm-right">
+                    <ul class="nav nav-pills card-header-pills float-sm-right pt-2">
                         <li class="nav-item">
-                            <a class="nav-link active bg-success" href="#"> <i class="fa fa-plus"></i> Agregar</a>
+                            <a class="nav-link active bg-success" data-toggle="modal" data-target="#UserModal"> <i class="fa fa-plus"></i> Agregar</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-12 table-responsive-sm">
+                    <table class="table dt-responsive table-striped" id="tabla">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Rut</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Fecha de Registro</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{user.user.first_name}} {{user.user.last_name}}</th>
+                                <td>{{user.rut}}-{{user.dv}}</td>
+                                <td>{{user.user.email}}</td>
+                                <td>{{user.user.date_joined}}</td>
+                                <td><a class="btn btn-warning editar text-center" data-userpk="{{user.pk}}"><i class="fa fa-edit text-white"></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="UserModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Crear Usuario Nuevo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="">
+                <div class="form-group">
+                    <label for="nombre_input">Nombre(s):</label>
+                    <input type="text" class="form-control" id="nombre_input" aria-describedby="nombreHelp" placeholder="Ingrese su nombre" required>
+                    {% comment %} <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                </div>
+                <div class="form-group">
+                    <label for="apellidos_input">Apellidos:</label>
+                    <input type="text" class="form-control" id="apellidos_input" placeholder="Ingrese sus apellidos" required>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-9">
+                            <label for="rut_input" >Rut:</label>
+                            <input type="text" class="form-control" id="rut_input" aria-describedby="rutHelp" placeholder="19404344" required>
+                        </div>
+                        <div class="col-3">
+                            <label for="dv_input" >Dv:</label>
+                            <input type="text" class="form-control" id="dv_input" aria-describedby="dvHelp" placeholder="k" required>
+                        </div>
+                    </div>
+                    {% comment %} <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                </div>
+                <div class="form-group">
+                    <label for="email_input">Correo electrónico:</label>
+                    <input type="text" class="form-control" id="email_input" aria-describedby="emailHelp" placeholder="Ingrese su email">
+                    {% comment %} <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                </div>
+                <div class="form-group">
+                    <label for="tipo_select">Tipo:</label>
+                    <select class="form-control" id="tipo_select" aria-describedby="tipoHelp" required>
+                        <option value="VE" selected>Vendedor</option>
+                        <option value="CO" selected>Comprador</option>
+                        <option value="AD" selected>Administrador</option>
+                    </select>
+                    {% comment %} <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="create" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
 {% endblock content %}
-
+{% block javascript %}
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#tabla').DataTable();
+        $('#tipo_select').select2();
+        $("#create").click(function(){
+            console.log("Click");
+            var name = $("#nombre_input").val();
+            var last_name = $("#apellidos_input").val();
+            var email = $("#email_input").val();
+            var rut = $("#rut_input").val();
+            var dv = $("#dv_input").val();
+            var tipo = $('#tipo_select').val();
+            
+            var data = {
+                csrfmiddlewaretoken:"{{csrf_token}}",
+                name: name,
+                last_name: last_name,
+                email:email,
+                rut:rut,
+                dv: dv,
+                tipo: tipo
+            }
+            $.ajax({
+                type: "post",
+                url: "{% url 'admin_usuario' %}",
+                data: data,
+                success: function (response) {
+                    swal("Exito!",response.mensaje,'success');
+                },
+                error: function () {
+                    swal("Error","Algo salío mal, por favor verifique los campos.",'warning');
+                },
+            });
+        });
+    })
+</script>
+{% endblock javascript %}
