@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.models import *
+from django.http import JsonResponse
 from .forms import MaterialForm
 # Create your views here.
 
