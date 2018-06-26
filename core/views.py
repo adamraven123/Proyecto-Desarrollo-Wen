@@ -15,10 +15,12 @@ def ingresar_stock(request):
 	if request.method == "POST":
 		mater = request.POST["material"]
 		cantidad = request.POST["cantidad"]
-		#mater = Material.objects.get(pk=int(mater))
-		#mater.stock.cantidad += int(cantidad)
-		#mater.save()
-		print (cantidad)
+		mater = Material.objects.get(pk=int(mater))
+		print (mater.nombre)
+		mater.stock.cantidad += int(cantidad)
+		print (mater.stock.cantidad)
+		mater.save()
+		#print (cantidad)
 	else:
 		material = Material.objects.all()
 		stock = Stock.objects.filter()
