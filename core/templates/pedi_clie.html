@@ -15,7 +15,7 @@
 					<a id='about' href="#prefab" class="btn btn-primary btn-lg align-middle"> Predeterminada </a>
 				</div>
 				<div class="col-6 text-center">
-					<a href=" " class="btn btn-success btn-lg align-middle"> Personalizada </a>
+					<a id='about' href="#create" class="btn btn-success btn-lg align-middle"> Personalizada </a>
 				</div>
 				<br>
 				<br>
@@ -26,8 +26,11 @@
 				<br>
 			</div>
 		</div>
-		<div class="col-12">
-			<div id="prefab" class="row">
+		<div class="col-12 text-center">
+			<h1>Nuestra seleccion para ti </h1>
+		</div>
+		<div class="col-12 ">
+			<div id="prefab" class="row text-center">
 				<div class="col">
 					<div class="card" style="width: 18rem;">
 						<img class="card-img-top" src="{% static 'images/milhojas.jpg' %}" alt="Card image cap">
@@ -50,44 +53,159 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-12">
+		<div id="create" class="col-12">
 			<div class="row">
 				<div class="col-12 text-center">
 					<h1>Tu Pastel, Tus gustos</h1>
 				</div>
 				<div class="col-12">
 					<div class="row">
-						<div class="container col-10">
-							<img class="rounded img-pastel img-fluid" src="{% static 'images/pastel-4.jpg' %}" alt="">
+						<div class="container col-8">
+							<img id="img1" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-2.png' %}" alt="">
+							<img id="img2" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-3.png' %}" style="display:none;" alt="">
+							<img id="img3" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-4.png' %}" style="display:none;" alt="">
 						</div>
-						<div class="col-2">
-							<div class="dropdown">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">¿Para cuantas personas?</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">20 personas</a>
-									<a class="dropdown-item" href="#">30 personas</a>
-									<a class="dropdown-item" href="#">40 personas</a>
+						<div class="col-4">
+							<div id="bloque1" class="card text-white bg-success mb-4 " style="margin-top: 9%;">
+								<div class="card-header">Tus elecciones</div>
+								<div class="card-body" style="margin-top: -5%;">
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Para cuantas personas?</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item boton_p 20">20 personas</a>
+											<a class="dropdown-item 30 boton_p">30 personas</a>
+											<a class="dropdown-item 40 boton_p">40 personas</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Que base le gustaria?</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">base 1</a>
+											<a class="dropdown-item">base 2</a>
+											<a class="dropdown-item">base 3</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 1ra capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 2da capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
 								</div>
+								<button type="button" class="btn btn-danger inter-space" data-toggle="dropdown">Pedir Pastel </button>
 							</div>
-							<div class="dropdown">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">¿Que base le gustaria?</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">base 1</a>
-									<a class="dropdown-item" href="#">base 2</a>
-									<a class="dropdown-item" href="#">base 3</a>
+							<div id="bloque2" class="card text-white bg-success mb-4 " style="margin-top: 9%; display:none;">
+								<div class="card-header">Tus elecciones</div>
+								<div class="card-body" style="margin-top: -5%;">
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Para cuantas personas?</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item boton_p 20">20 personas</a>
+											<a class="dropdown-item 30 boton_p">30 personas</a>
+											<a class="dropdown-item 40 boton_p">40 personas</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Que base le gustaria?
+									</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">base 1</a>
+											<a class="dropdown-item">base 2</a>
+											<a class="dropdown-item">base 3</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 1ra capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 2da capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 3ra capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
 								</div>
+								<button type="button" class="btn btn-danger inter-space" data-toggle="dropdown">Pedir Pastel </button>
 							</div>
-							<div class="dropdown">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Ingrediente 1ra capa </button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">ingrediente 1</a>
-									<a class="dropdown-item" href="#">ingrediente 2</a>
-									<a class="dropdown-item" href="#">ingrediente 3</a>
+							<div id="bloque3" class="card text-white bg-success mb-4 " style="margin-top: 9%; display:none;">
+								<div class="card-header">Tus elecciones</div>
+								<div class="card-body" style="margin-top: -5%;">
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Para cuantas personas?</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item boton_p 20">20 personas</a>
+											<a class="dropdown-item 30 boton_p">30 personas</a>
+											<a class="dropdown-item 40 boton_p">40 personas</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Que base le gustaria?
+									</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">base 1</a>
+											<a class="dropdown-item">base 2</a>
+											<a class="dropdown-item">base 3</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 1ra capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
+									<div class="dropdown"><button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 2da capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
+									<div class="dropdown"><button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 3ra capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
+									<div class="dropdown">
+										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 4ta capa </button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item">ingrediente 1</a>
+											<a class="dropdown-item">ingrediente 2</a>
+											<a class="dropdown-item">ingrediente 3</a>
+										</div>
+									</div>
 								</div>
+								<button type="button" class="btn btn-danger inter-space" data-toggle="dropdown">Pedir Pastel </button>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -96,10 +214,43 @@
 
 {% endblock content %} {% block javascript %}
 <script>
+	$(document).on('click', ".boton_p", function() {
+		if ($(this).hasClass("20")) {
+			$("#bloque2").hide();
+			$("#img2").hide();
+			$("#bloque3").hide();
+			$("#img3").hide();
+			$("#bloque1").show();
+			$("#img1").show();
+
+		} else if ($(this).hasClass("30")) {
+			$("#bloque3").hide();
+			$("#img3").hide();
+			$("#bloque1").hide();
+			$("#img1").hide();
+			$("#bloque2").show();
+			$("#img2").show();
+
+		} else if ($(this).hasClass("40")) {
+			$("#bloque2").hide();
+			$("#img2").hide();
+			$("#bloque1").hide();
+			$("#img1").hide();
+			$("#bloque3").show();
+			$("#img3").show();
+
+
+		}
+
+	})
 	$(document).ready(function() {
 		if (window.location.hash == "#prefab") {
 			$('html, body').animate({
 				scrollTop: $("#prefab").offset().top
+			}, 1000);
+		} else if (window.location.hash == "#create") {
+			$('html, body').animate({
+				scrollTop: $("#create").offset().top
 			}, 1000);
 		}
 	});

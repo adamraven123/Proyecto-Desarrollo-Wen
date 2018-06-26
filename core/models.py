@@ -57,9 +57,9 @@ class CantReceta(models.Model):
 				default=MEDIDA_DEFAULT
 			)
 	cantidad = models.IntegerField(default=0)
-	def __str__(self):
-		return self.ingrediente.nombre + " " + str(self.cantidad) + " " + self.medida
-	
+	def cantidad_total(self):
+		return '{} {}'.format(self.cantidad, self.medida)
+
 
 class BasePastel(models.Model):
 	nombre = models.CharField(max_length=500,null=True,blank=True)
