@@ -30,3 +30,10 @@ def ingresar_stock(request):
 	template_name = 'ingresar_stock.html'
 	return render(request, template_name, data)
 
+def pedidos(request):
+	data = {}
+	data['inicio'] = 'Bienvenidos'
+	template_name = 'pedi_clie.html'
+	return render(request,template_name,data)
+
+
