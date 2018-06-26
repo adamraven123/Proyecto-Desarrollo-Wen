@@ -19,20 +19,29 @@
 			<li id="en_list" class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administración</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#">Clientes</a>
-				<a class="dropdown-item" href="#">Vendedores</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Pasteles</a>
+					<a class="dropdown-item" href="#">Clientes</a>
+					<a class="dropdown-item" href="#">Vendedores</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Pasteles</a>
 				</div>
 			</li>
 			{% endif %}
+			<li id="auth" class="nav-item">
+				{% if request.user.is_authenticated %}
+					<a href="{% url 'auth_logout' %}" class="nav-link btn btn-success pull-right">
+						<i class="fas fa-sign-in-alt"></i> Salir</a>
+				{% else %}
+					<a href="{% url 'auth_login' %}" class="nav-link btn btn-success pull-right">
+						<i class="fas fa-sign-in-alt"></i> Ingresar</a>
+				{% endif %}
+			</li>
 		</ul>
 	</div>
-	{% if request.user.is_authenticated %}
+	<!-- {% if request.user.is_authenticated %}
 		<a href="{% url 'auth_logout' %}" class="btn btn-success pull-right">
 			<i class="fas fa-sign-in-alt"></i> Salir</a>
 	{% else %}
 		<a href="{% url 'auth_login' %}" class="btn btn-success pull-right">
 			<i class="fas fa-sign-in-alt"></i> Ingresar</a>
-	{% endif %}
+	{% endif %} -->
 </nav>

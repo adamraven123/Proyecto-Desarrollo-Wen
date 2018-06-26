@@ -47,7 +47,7 @@ class PedidoForm(forms.ModelForm):
 class CapaPastelForm(forms.ModelForm):
     class Meta:
         model = CapaPastel
-        fields = ['crema', 'pastel', 'ingredientes']
+        fields = ['crema', 'ingredientes']
 
 
 class PerfilUsuarioForm(forms.ModelForm):
