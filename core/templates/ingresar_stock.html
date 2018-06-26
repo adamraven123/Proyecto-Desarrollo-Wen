@@ -135,9 +135,9 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-md-3 col-form-label" for="id_cantidad">Cantidad:</label>
+								<label class="col-md-3 col-form-label" for="id_cantidadA">Cantidad:</label>
 								<div class="col-md-9">
-			  						<input type="int" class="form-control" name="codigo" id="id_cantidad" required="">
+			  						<input type="number" class="form-control" name="cantidadA" id="id_cantidadA" required="">
 			  					</div>
 			  				</div>
 						</form>
@@ -195,13 +195,13 @@
             var nombre = $('#id_nombre').val();
             var tipo = $('#id_tipo').val();
             var medida = $('#id_medida').val();
-            var cantidad = $('#id_cantidad').val();
+            var cantidad = $('#id_cantidadA').val();
             var data = {
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 nombre: nombre,
                 tipo: tipo,
                 medida: medida,
-                codigo: cantidad,
+                cantidad: cantidad,
             }
 
             $.ajax({
