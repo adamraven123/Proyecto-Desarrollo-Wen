@@ -24,11 +24,27 @@ def ingresar_stock(request):
 def admin_usuario(request):
 	data = {}
 	if request.method == "POST":
-		pass
+		n_user = User.objects.create_user(
+			username=request.POST["rut"],
+			password=request.POST["name"].split(" ")[0]+request.POST["dv"],
+			email=request.POST['email'],
+			first_name=request.POST["name"],
+			last_name=request.POST['last_name'],
+		)
+		n_user.save()
+		n_perfil = PerfilUsuario.objects.create(
+			user = n_user,
+			role = request.POST["tipo"],
+			rut = request.POST['rut'],
+			dv = request.POST['dv']
+		)
+		n_perfil.save()
+		return JsonResponse({'mensaje':'El usuario ha sido creado con éxito. \n La contraseña es una combinación de su primer y su dígito verificador.'})
 	else:
 		data['users'] = PerfilUsuario.objects.all()
 		template_name = 'perfil_usuario/admin_usuarios.html'
 		return render(request,template_name,data)
+
 def pedidos(request):
 	data = {}
 	data['inicio'] = 'Bienvenidos'
