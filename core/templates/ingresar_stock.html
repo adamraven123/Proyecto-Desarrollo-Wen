@@ -6,7 +6,7 @@
 {% block content %}
 <div class = "container">
 	<div class="row">
-		<div class="col-lg-10 col-offset-4">
+		<div class="col-lg-12 col-offset-4">
 			<div class="card">
 				<h5 class="card-header">{{tabla}}</h5>
 				<div class="card-body">
@@ -15,23 +15,22 @@
 					<h5 class="card-title">Stock de Materiales en sistema.</h5>
 						</div>
 						<div class="col">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalStock">
-			  		Ingresar Stock</button>
-			  					<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AgregarMaterial">
-						  Agregar Material
-						</button>
+					<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ModalStock">Ingresar Stock</button>
 						</div>
+			  			<div class="col">
+			  			<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#AgregarMaterial">Agregar Material</button>
+			  			</div>
 					</div>
 					<!-- Button trigger modal -->
 					<p class="card-text"></p>
 					<table class="table table-bordered" id="tabla1">
 					    <thead>
 					        <tr>
-					            <th>Nombre</th>
-					            <th>Codigo</th>
-					            <th>Tipo</th>
-					            <th>Stock</th>
+					            <th scope="col">Nombre</th>
+					            <th scope="col">Codigo</th>
+					            <th scope="col">Tipo</th>
+					            <th scope="col">Stock</th>
 					        </tr>
 					    </thead>
 					    <tbody id="tbody">
@@ -45,7 +44,6 @@
 					        {% endfor %}
 					    </tbody>
 					</table>
-					<a type="submit" value="Enviar" id="hola" class="btn btn-primary text-white">Enviar</a>	
 				</div>
 			</div>
 		</div>
@@ -113,12 +111,6 @@
 			      <div class="modal-body">
 						<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 							<div class="form-group row">
-								<label class="col-md-3 col-form-label" for="id_codigo">Codigo:</label>
-								<div class="col-md-9">
-			  						<input type="text" class="form-control" name="codigo" id="id_codigo" required="">
-			  					</div>
-			  				</div>
-							<div class="form-group row">
 								<label class="col-md-3 col-form-label" for="id_nombre">Nombre:</label>
 								<div class="col-md-9">
 			  						<input type="text" class="form-control" name="nombre" id="id_nombre" required="">
@@ -142,6 +134,12 @@
 									</select>
 								</div>
 							</div>
+							<div class="form-group row">
+								<label class="col-md-3 col-form-label" for="id_cantidad">Cantidad:</label>
+								<div class="col-md-9">
+			  						<input type="int" class="form-control" name="codigo" id="id_cantidad" required="">
+			  					</div>
+			  				</div>
 						</form>
 			      </div>
 			      <div class="modal-footer">
@@ -194,16 +192,16 @@
             });
         });
      	$("#enviar2").click(function(){
-            var codigo = $('#id_codigo').val();
             var nombre = $('#id_nombre').val();
             var tipo = $('#id_tipo').val();
             var medida = $('#id_medida').val();
+            var cantidad = $('#id_cantidad').val();
             var data = {
                 csrfmiddlewaretoken: "{{csrf_token}}",
-                codigo: codigo,
                 nombre: nombre,
                 tipo: tipo,
                 medida: medida,
+                codigo: cantidad,
             }
 
             $.ajax({

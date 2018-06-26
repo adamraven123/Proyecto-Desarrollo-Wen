@@ -44,14 +44,13 @@ def crearMaterial(request):
 		medida = request.POST["medida"]
 		tipo = request.POST["tipo"]
 		nombre = request.POST["nombre"]
-		codigo = request.POST["codigo"]
+		cantidad = request.POST["cantidad"]
 		stock = Stock.objects.create(
 			medida = medida,
-			cantidad = 0,
+			cantidad = cantidad,
 			)
 		stock.save()
 		mater = Material.objects.create(
-			cod = medida,
 			tipo = tipo,
 			nombre = nombre,
 			stock= stock,
