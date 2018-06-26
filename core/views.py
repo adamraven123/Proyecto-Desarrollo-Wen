@@ -19,6 +19,7 @@ def ingresar_stock(request):
 		print (mater.nombre)
 		mater.stock.cantidad += int(cantidad)
 		print (mater.stock.cantidad)
+		mater.stock.save()
 		mater.save()
 		#print (cantidad)
 	else:
