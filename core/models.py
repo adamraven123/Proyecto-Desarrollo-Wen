@@ -44,6 +44,17 @@ class Pastel(models.Model):
 	vegano = models.BooleanField(default=False)
 	image = models.ImageField(upload_to='pasteles',default=None)
 	celiaco = models.BooleanField(default=False)
+	def get_capas(self):
+		salida = ""
+		i = 1
+		for capa in self.capas.all():
+			if i == 1:
+				salida += "%d. %s con %s" % (i,capa.crema,capa.get_ingredientes())
+			else:
+				salida += "<br>%d. %s con %s" % (i,capa.crema,capa.get_ingredientes())
+			i+=1
+		return salida
+
 	def __str__(self):
 		return self.nombre
 
@@ -63,6 +74,12 @@ class CantReceta(models.Model):
 class BasePastel(models.Model):
 	nombre = models.CharField(max_length=500,null=True,blank=True)
 	receta = models.ManyToManyField(CantReceta,blank=True)
+	
+	def get_receta(self):
+		salida = ""
+		for cant in self.receta:
+			salida += "%d %s de %s, " % (cant.cantidad,cant.medida,cant.ingrediente.nombre)
+		return salida[:-2]
 
 class Pedido(models.Model):
 	fecha_pedido = models.DateField(default=date.today)
@@ -82,7 +99,12 @@ class Pedido(models.Model):
 class CapaPastel(models.Model):
 	crema = models.CharField(max_length=2,choices=CREMA_CHOICES,default=CREMA_DEFAULT)
 	ingredientes = models.ManyToManyField(Material,blank=True)
-
+	
+	def get_ingredientes(self):
+		salida = ""
+		for ingrediente in self.ingredientes.all():
+			salida += ingrediente.nombre+", "
+		return salida[:-2]
 class PerfilUsuario(models.Model):
 
 	user = models.OneToOneField(User,null=True,blank=True,on_delete=models.CASCADE)

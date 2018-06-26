@@ -61,6 +61,14 @@ def admin_usuario(request):
 		data['users'] = PerfilUsuario.objects.all()
 		template_name = 'perfil_usuario/admin_usuarios.html'
 		return render(request,template_name,data)
+def admin_pastel(request):
+	data = {}
+	if request.method == "POST":
+		return JsonResponse({'mensaje':'El usuario ha sido creado con éxito. \n La contraseña es una combinación de su primer y su dígito verificador.'})
+	else:
+		data['pasteles'] = Pastel.objects.all()
+		template_name = 'pastel/admin_pastel.html'
+		return render(request,template_name,data)
 
 def pedidos(request):
 	data = {}
