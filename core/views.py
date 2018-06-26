@@ -21,13 +21,19 @@ def ingresar_stock(request):
 		print (mater.stock.cantidad)
 		mater.stock.save()
 		mater.save()
-		#print (cantidad)
+		select = "#cant_"+str(mater.pk)
+		cant = mater.total
+		data = {
+			"cant":cant,
+			'select':select}
+		return JsonResponse(data)
 	else:
 		material = Material.objects.all()
-		stock = Stock.objects.filter()
+		stock = Stock.objects.all()
 		data["materiales"] = material
 	
-	data["titulo"] = "Agregar "
+	data["titulo"] = "Agregar Stock"
+	data["tabla"] = "Tabla de Materiales"
 	template_name = 'ingresar_stock.html'
 	return render(request, template_name, data)
 
