@@ -5,4 +5,5 @@ from core import views
 urlpatterns = [
 	path('',views.index, name = "index"),
 	path('add_stock/',views.ingresar_stock, name = "add_stock"),
+	path('pedidos/',views.pedidos, name = "pedidos"),
 ]

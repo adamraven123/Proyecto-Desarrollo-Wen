@@ -19,3 +19,9 @@ def ingresar_stock(request):
 		data['form'] = MaterialForm()
 	template_name = 'ingresar_stock.html'
 	return render(request,template_name,data)
+
+def pedidos(request):
+	data = {}
+	data['inicio'] = 'Bienvenidos'
+	template_name = 'pedi_clie.html'
+	return render(request,template_name,data)
