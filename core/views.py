@@ -124,9 +124,10 @@ def admin_pastel(request):
 
 def pedidos(request):
 	data = {}
-	data['objet_list'] = Pastel.objects.all()
+	data['pasteles'] = Pastel.objects.all()
 	data['bases'] = BasePastel.objects.all()
-	data['ingre'] = Material.objects.filter(tipo="IT").exclude(stock__cantidad=0).all() 
+	data['ingredientes'] = Material.objects.filter(tipo="IT").exclude(stock__cantidad=0).all()
+	data['materiales'] = Material.objects.filter(tipo="MP").exclude(stock__cantidad=0).all()
 	
 	template_name = 'pedi_clie.html'
 	return render(request,template_name,data)

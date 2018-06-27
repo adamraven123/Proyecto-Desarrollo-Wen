@@ -1,4 +1,9 @@
-{% extends "base.html" %} {% block content %} {% load static %}
+{% extends "base.html" %} 
+{% load static %}
+{% block css%}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock css%}
+{% block content %} 
 <div class="container">
 	<div class="row">
 		<div class="col-12">
@@ -66,7 +71,155 @@
 		<div id="create" class="col-12">
 			<div class="card">
 			  	<div class="card-body">
-			
+				<form id="formpastel" action="{% url 'create_pastel' %}" enctype="multiplart/formdata">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="pastel_input">Nombre:</label>
+                        <input type="text" class="form-control" id="pastel_input" name="pastel_input" aria-describedby="pastelHelp" placeholder="Ingrese su nombre" required> {% comment %}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                    </div>
+                    <div class="form-group pt-2">
+                        <div class="row">
+                            <div class="col">
+                                <label for="base_input">Base:</label>
+                                <select type="text" class="form-control" id="base_input" name="base_input" aria-describedby="baseHelp" required>
+                                    {% for base in bases %}
+                                    <option value="{{base.pk}}" >{{base.nombre}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="base_input">Covertura:</label>
+                                <select type="text" class="form-control" id="cover_input" name="cover_input" aria-describedby="coverHelp" required> 
+                                    <option value="FT" >Fondant</option>
+                                    <option value="CR" >Crema</option>
+                                    <option value="CH" >Chocolate</option>
+                                    <option value="MR" >Mermelada</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        {% comment %}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="pt-2" for="capa">Capas:</label>
+                                <small id="capa" class="form-text text-muted">Cada capa consiste de una crema y algunos ingredientes a elección.</small>
+                            </div>
+                        </div>            
+                    </div>
+                    <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="id_personas">¿Para cuantas personas?</label>
+                    	    <div class="col-md-9">
+                            <select name="personas" class="form-control" id="id_personas" title="" required="">
+            		                <option value="20">20 personas</option>
+		                            <option value="30">30 personas</option>
+        	                       	<option value="40">40 personas</option>
+                        	</select>
+                        </div>
+					</div>
+
+                    <div class="dropdown-divider"></div>
+                    <div class="form-group animated fadeIn" id="capa1">
+	                    <div class="row">
+	                        <div class="col">
+	                            <label for="rut_input" >Crema:</label>
+	                                <select class="form-control cre_select" name="cre_'+i+'" id="cre_'+i+'" aria-describedby="tipoHelp" required>
+	                                <option value="CC" selected>Crema de Chocolate</option>
+	                                <option value="CB" >Crema Batida</option>
+	                                <option value="NL" >Nutella</option>
+	                                <option value="MJ" >Manjar</option>
+	                                <option value="CP" >Crema Pastelera</option>
+	                                <option value="CM" >Crema Mantequilla</option>
+	                                <option value="ME" >Merengue</option>
+	                                </select>
+	                        </div>
+	                        <div class="col">
+								<label for="dv_input" >Ingredientes:</label>
+								<select class="form-control" name="ing_'+i+'" id="ing_'+i+'" aria-describedby="cantHelp" multiple="multiple" required>
+								{% for ingrediente in ingredientes %}
+								<option value="{{ingrediente.pk}}">{{ingrediente.nombre}}</option>
+								{% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group animated fadeIn" id="capa2" style="display: none;">
+	                    <div class="row">
+	                        <div class="col">
+	                            <label for="rut_input" >Crema:</label>
+	                                <select class="form-control cre_select" name="cre_'+i+'" id="cre_'+i+'" aria-describedby="tipoHelp" required>
+	                                <option value="CC" selected>Crema de Chocolate</option>
+	                                <option value="CB" >Crema Batida</option>
+	                                <option value="NL" >Nutella</option>
+	                                <option value="MJ" >Manjar</option>
+	                                <option value="CP" >Crema Pastelera</option>
+	                                <option value="CM" >Crema Mantequilla</option>
+	                                <option value="ME" >Merengue</option>
+	                                </select>
+	                        </div>
+	                        <div class="col">
+								<label for="dv_input" >Ingredientes:</label>
+								<select class="form-control" name="ing_'+i+'" id="ing_'+i+'" aria-describedby="cantHelp" multiple="multiple" required>
+								{% for ingrediente in ingredientes %}
+								<option value="{{ingrediente.pk}}">{{ingrediente.nombre}}</option>
+								{% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group animated fadeIn" id="capa3" style="display: none;">
+	                    <div class="row">
+	                        <div class="col">
+	                            <label for="rut_input" >Crema:</label>
+	                                <select class="form-control cre_select" name="cre_'+i+'" id="cre_'+i+'" aria-describedby="tipoHelp" required>
+	                                <option value="CC" selected>Crema de Chocolate</option>
+	                                <option value="CB" >Crema Batida</option>
+	                                <option value="NL" >Nutella</option>
+	                                <option value="MJ" >Manjar</option>
+	                                <option value="CP" >Crema Pastelera</option>
+	                                <option value="CM" >Crema Mantequilla</option>
+	                                <option value="ME" >Merengue</option>
+	                                </select>
+	                        </div>
+	                        <div class="col">
+								<label for="dv_input" >Ingredientes:</label>
+								<select class="form-control" name="ing_'+i+'" id="ing_'+i+'" aria-describedby="cantHelp" multiple="multiple" required>
+								{% for ingrediente in ingredientes %}
+								<option value="{{ingrediente.pk}}">{{ingrediente.nombre}}</option>
+								{% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group animated fadeIn" id ="capa4" style="display: none;">
+	                    <div class="row">
+	                        <div class="col">
+	                            <label for="rut_input" >Crema:</label>
+	                                <select class="form-control cre_select" name="cre_'+i+'" id="cre_'+i+'" aria-describedby="tipoHelp" required>
+	                                <option value="CC" selected>Crema de Chocolate</option>
+	                                <option value="CB" >Crema Batida</option>
+	                                <option value="NL" >Nutella</option>
+	                                <option value="MJ" >Manjar</option>
+	                                <option value="CP" >Crema Pastelera</option>
+	                                <option value="CM" >Crema Mantequilla</option>
+	                                <option value="ME" >Merengue</option>
+	                                </select>
+	                        </div>
+	                        <div class="col">
+								<label for="dv_input" >Ingredientes:</label>
+								<select class="form-control" name="ing_'+i+'" id="ing_'+i+'" aria-describedby="cantHelp" multiple="multiple" required>
+								{% for ingrediente in ingredientes %}
+								<option value="{{ingrediente.pk}}">{{ingrediente.nombre}}</option>
+								{% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                <a type="submit" value="Enviar" id="enviar" class="btn btn-primary text-white">Enviar</a>
+            </form>
 				</div>
 			</div> 
 		</div> 
@@ -74,36 +227,8 @@
 </div>
 
 	{% endblock content %} {% block javascript %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 	<script>
-		$(document).on('click', ".boton_p", function() {
-			if ($(this).hasClass("20")) {
-				$("#bloque2").hide();
-				$("#img2").hide();
-				$("#bloque3").hide();
-				$("#img3").hide();
-				$("#bloque1").show();
-				$("#img1").show();
-
-			} else if ($(this).hasClass("30")) {
-				$("#bloque3").hide();
-				$("#img3").hide();
-				$("#bloque1").hide();
-				$("#img1").hide();
-				$("#bloque2").show();
-				$("#img2").show();
-
-			} else if ($(this).hasClass("40")) {
-				$("#bloque2").hide();
-				$("#img2").hide();
-				$("#bloque1").hide();
-				$("#img1").hide();
-				$("#bloque3").show();
-				$("#img3").show();
-
-
-			}
-
-		})
 		$(document).ready(function() {
 			if (window.location.hash == "#prefab") {
 				$('html, body').animate({
@@ -114,8 +239,63 @@
 					scrollTop: $("#create").offset().top
 				}, 1000);
 			}
+			
+	});
+		$(document).on('change',"#id_personas",function(){
+				var val = $(this).val();
+				console.log(var);
+				if (val == "20"){
+					$("#capa1").show()
+					$("#capa2").show()
+					$("#capa3").hide()
+					$("#capa4").hide()
+					$("#capa3").val("")
+					$("#capa4").val("")
+				}
+				else if (val == "30"){
+					$("#capa1").show()
+					$("#capa2").show()
+					$("#capa3").show()
+					$("#capa4").hide()
+					$("#capa3").val("")
+				}
+				else if (val == "40"){
+					$("#capa1").show()
+					$("#capa2").show()
+					$("#capa3").show()
+					$("#capa4").show()
+				}
 		});
+		$(document).ready(function(){
+			$("#id_personas").change(function(){
+				var val = $(this).val();
+				console.log(var);
+				if (val == "20"){
+					$("#capa1").show()
+					$("#capa2").show()
+					$("#capa3").hide()
+					$("#capa4").hide()
+					$("#capa3").val("")
+					$("#capa4").val("")
+				}
+				else if (val == "30"){
+					$("#capa1").show()
+					$("#capa2").show()
+					$("#capa3").show()
+					$("#capa4").hide()
+					$("#capa3").val("")
+				}
+				else if (val == "40"){
+					$("#capa1").show()
+					$("#capa2").show()
+					$("#capa3").show()
+					$("#capa4").show()
+				}
+			});
+			$("#enviar"){
 
+			}
+		});
 	</script>
 
 	{% endblock javascript %}
