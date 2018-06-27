@@ -117,6 +117,7 @@ def admin_pastel(request):
 	else:
 		data['pasteles'] = Pastel.objects.all()
 		data['bases'] = BasePastel.objects.all()
+		data['ingredientes'] = Material.objects.filter(tipo="IT").all()
 		data['materiales'] = Material.objects.filter(tipo="MP").all()
 		template_name = 'pastel/admin_pastel.html'
 		return render(request,template_name,data)
