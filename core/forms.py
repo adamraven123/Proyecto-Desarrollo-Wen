@@ -29,7 +29,7 @@ class PastelForm(forms.ModelForm):
 class CantRecetaForm(forms.ModelForm):
     class Meta:
         model = CantReceta
-        fields = ['medida', 'ingrediente']
+        fields = ['ingrediente','cantidad']
 
 
 class BasePastelForm(forms.ModelForm):

@@ -66,7 +66,7 @@ class CantRecetaAdminForm(forms.ModelForm):
 
 class CantRecetaAdmin(admin.ModelAdmin):
     form = CantRecetaAdminForm
-    list_display = ['medida','cantidad_total']
+    list_display = ['cantidad_total']
 
 admin.site.register(CantReceta, CantRecetaAdmin)
 

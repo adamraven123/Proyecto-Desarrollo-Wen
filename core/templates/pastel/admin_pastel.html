@@ -1,0 +1,213 @@
+{% extends "base.html" %} {% block css %}
+<link href='https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" /> {% endblock css %} 
+{% block content %}
+<div class="container">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-pasteles-tab" data-toggle="pill" href="#pills-pasteles" role="tab" aria-controls="pills-pasteles"
+                aria-selected="true">Pasteles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-bases-tab" data-toggle="pill" href="#pills-bases" role="tab" aria-controls="pills-bases" aria-selected="false">Bases</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-pasteles" role="tabpanel" aria-labelledby="pills-pasteles-tab">
+            <div class="container">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col ">
+                                <h4>
+                                    <strong class="card-name float-sm-left pt-2">Lista de Pasteles</strong>
+                                </h4>
+                            </div>
+                            <div class="col">
+                                <ul class="nav nav-pills card-header-pills float-sm-right pt-2">
+                                    <li class="nav-item">
+                                        <a class="nav-link active bg-success" data-toggle="modal" data-target="#UserModal">
+                                            <i class="fa fa-plus"></i> Agregar</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 table-responsive-sm">
+                                <table class="table dt-responsive table-striped" id="tabla">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Base</th>
+                                            <th scope="col">Capas</th>
+                                            <th scope="col">Covertura</th>
+                                            <th scope="col">Características</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for pastel in pasteles %}
+                                        <tr>
+                                            <td>{{pastel.nombre}}</th>
+                                                <td>{{pastel.base}}</td>
+                                                <td>{{pastel.get_capas | safe}}</td>
+                                                <td>{{pastel.cover}}</td>
+                                                <td>{{pastel.vegano}} {{pastel.celiaco}}</td>
+                                                <td>
+                                                    <a class="btn btn-warning editar text-center" data-pastelpk="{{pastel.pk}}">
+                                                        <i class="fa fa-edit text-white"></i>
+                                                    </a>
+                                                </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-bases" role="tabpanel" aria-labelledby="pills-bases-tab">
+            <div class="container">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col ">
+                                <h4>
+                                    <strong class="card-name float-sm-left pt-2">Lista de Bases</strong>
+                                </h4>
+                            </div>
+                            <div class="col">
+                                <ul class="nav nav-pills card-header-pills float-sm-right pt-2">
+                                    <li class="nav-item">
+                                        <a class="nav-link active bg-success text-white" data-toggle="modal" data-target="#BaseModal">
+                                            <i class="fa fa-plus"></i> Agregar</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 table-responsive-sm">
+                                <table class="table dt-responsive table-striped" id="tabla2">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Receta</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for base in bases %}
+                                        <tr>
+                                            <td>{{base.nombre}}</th>
+                                            <td>{{base.get_receta}}</td>
+                                            <td>
+                                                <a class="btn btn-warning editar text-center" data-pastelpk="{{base.pk}}">
+                                                    <i class="fa fa-edit text-white"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="BaseModal" role="dialog" aria-labelledby="UserModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Crear Base de Pastel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formbase" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre_input">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre_input" name="nombre_input" aria-describedby="nombreHelp" placeholder="Ingrese su nombre" required> {% comment %}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="pt-2" for="apellidos_input">Ingredientes:</label>
+                                <small id="cantidadHelp" class="form-text text-muted">Las unidad de medida depende del ingrediente (puede ser, gramos, cc o unidades)</small>
+                            </div>
+                            <div class="col-2 col-offset-1 pt-4 float-sm-right">
+                                <a class="btn bg-success text-white" id="agregar_ing"><i class="fa fa-plus"></i></a>
+                            </div>
+                        </div>            
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="base_create" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %} {% block javascript %}
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var i = 0;
+        $('#tabla').DataTable();
+        $('#tabla2').DataTable();
+        $('.ing_select').select2();
+        $("#base_create").click(function () {
+            console.log("Click");
+            data = $("#formbase").serializeArray();
+            $.ajax({
+                type: "post",
+                url: "{% url 'create_base' %}",
+                data: data,
+                success: function (response) {
+                    swal("Exito!", response.mensaje, 'success')
+                        .then((value) => {
+                            window.location.reload();
+                        });;
+                },
+                error: function () {
+                    swal("Error", "Algo salío mal, por favor verifique los campos.", 'warning');
+                },
+            });
+        });
+        $("#agregar_ing").click(function(){
+            var n_div = '<div class="form-group animated fadeIn">\
+                            <div class="row">\
+                                <div class="col">\
+                                    <label for="rut_input" >Ingrediente:</label>\
+                                    <select class="form-control ing_select" name="ing_'+i+'" id="ing_'+i+'" aria-describedby="tipoHelp" required>\
+                                        {% for material in materiales %}<option value="{{material.pk}}" selected>{{material.nombre}}</option>{% endfor %}\
+                                    </select>\
+                                </div>\
+                                <div class="col">\
+                                    <label for="dv_input" >Cantidad:</label>\
+                                    <input type="text" class="form-control" name="cant_'+i+'" id="cant_'+i+'" aria-describedby="dvHelp" placeholder="k" required>\
+                                </div>\
+                            </div>\
+                        </div>'
+            $('#formbase').append(n_div);
+            $('#ing_'+i).select2();
+            i ++;
+        })
+    })
+</script> {% endblock javascript %}
