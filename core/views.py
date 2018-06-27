@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from core.models import *
-from django.http import JsonResponse
+from django.urls import reverse
+from django.http import JsonResponse,HttpResponseRedirect
 from django.utils.datastructures import MultiValueDictKeyError
 from .forms import MaterialForm
 # Create your views here.
@@ -153,6 +154,7 @@ def create_base(request):
 	return JsonResponse({"mensaje":"ok"})
 
 def create_pastel(request):
+	print(request.POST)
 	name = request.POST['pastel_input']
 	cover = request.POST['cover_input']
 	base = request.POST['base_input']
@@ -189,4 +191,4 @@ def create_pastel(request):
 		except MultiValueDictKeyError:
 			break
 
-	return JsonResponse({"mensaje":"ok"})
+	return HttpResponseRedirect(reverse('admin_pastel'))
