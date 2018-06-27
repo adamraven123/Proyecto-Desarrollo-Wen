@@ -22,7 +22,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index,name='index'),
     path('auth/', include('pasteles_auth.urls'), name='auth'),
     path('', include('core.urls'), name='core'),
 
