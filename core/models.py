@@ -42,6 +42,8 @@ class Pastel(models.Model):
 		choices=COVER_CHOICE,
 		default=COVER_DEFAULT
 	)
+	personas = models.IntegerField(default=20)
+
 	capas = models.ManyToManyField("CapaPastel",related_name="capas_pastel",blank=True)
 	base = models.ForeignKey("BasePastel",null=True,default=None,on_delete=models.CASCADE)
 	vegano = models.BooleanField(default=False)
