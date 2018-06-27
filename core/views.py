@@ -27,6 +27,7 @@ def ingresar_stock(request):
 			"cant":cant,
 			'select':select}
 		print ("DATA ", data)
+		
 		return JsonResponse(data)
 	else:
 		material = Material.objects.all()
