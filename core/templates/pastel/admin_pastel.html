@@ -26,7 +26,7 @@
                             <div class="col">
                                 <ul class="nav nav-pills card-header-pills float-sm-right pt-2">
                                     <li class="nav-item">
-                                        <a class="nav-link active bg-success text-white" data-toggle="modal" data-target="#UserModal">
+                                        <a class="nav-link active bg-success text-white" data-toggle="modal" data-target="#PastelModal">
                                             <i class="fa fa-plus"></i> Agregar</a>
                                     </li>
                                 </ul>
@@ -180,7 +180,23 @@
                     </div>
                     <div class="form-group">
                         <label for="base_input">Base:</label>
-                        <select type="text" class="form-control" id="base_input" name="base_input" aria-describedby="baseHelp" required> {% comment %}
+                        <select type="text" class="form-control" id="base_input" name="base_input" aria-describedby="baseHelp" required>
+                            {% for base in bases %}
+                            <option value="{{base.pk}}" ></option>
+                            {% endfor %}
+                        </select>
+                        {% comment %}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                    </div>
+                    <div class="form-group">
+                        <label for="base_input">Covertura:</label>
+                        <select type="text" class="form-control" id="cover_input" name="cover_input" aria-describedby="coverHelp" required> 
+                            <option value="FT" >Fondant</option>
+                            <option value="CR" >Crema</option>
+                            <option value="CH" >Chocolate</option>
+                            <option value="MR" >Mermelada</option>
+                        </select>
+                        {% comment %}
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
                     </div>
                     <div class="form-group">
@@ -282,11 +298,4 @@
             i ++;
         })
     })
-    ('CC', 'Crema de chocolate'),
-    ('CB', 'Crema batida'),
-    ('NL', 'Nutella'),
-    ('MJ', 'Manjar'),
-    ('CP', 'Crema Pastelera'),
-    ('CM', 'Crema de Mantequilla'),
-    ('ME', 'Merengue'),
 </script> {% endblock javascript %}
