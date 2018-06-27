@@ -27,6 +27,7 @@ def ingresar_stock(request):
 			"cant":cant,
 			'select':select}
 		print ("DATA ", data)
+		
 		return JsonResponse(data)
 	else:
 		material = Material.objects.all()
@@ -44,14 +45,13 @@ def crearMaterial(request):
 		medida = request.POST["medida"]
 		tipo = request.POST["tipo"]
 		nombre = request.POST["nombre"]
-		codigo = request.POST["codigo"]
+		cantidad = request.POST["cantidad"]
 		stock = Stock.objects.create(
 			medida = medida,
-			cantidad = 0,
+			cantidad = cantidad,
 			)
 		stock.save()
 		mater = Material.objects.create(
-			cod = medida,
 			tipo = tipo,
 			nombre = nombre,
 			stock= stock,
@@ -62,7 +62,7 @@ def crearMaterial(request):
 					<td>%s</td>\
 					<td>%s</td>\
 					<td>%s</td>\
-		</tr>" %(nombre,codigo,tipo,stock)
+		</tr>" %(nombre,mater.pk,tipo,stock)
 		data = {
 			"html":html,
 		}

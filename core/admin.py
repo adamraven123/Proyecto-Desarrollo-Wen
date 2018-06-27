@@ -24,7 +24,7 @@ class MaterialAdminForm(forms.ModelForm):
 
 class MaterialAdmin(admin.ModelAdmin):
     form = MaterialAdminForm
-    list_display = ['cod', 'tipo', 'nombre']
+    list_display = ['tipo', 'nombre']
 
 admin.site.register(Material, MaterialAdmin)
 
@@ -66,7 +66,7 @@ class CantRecetaAdminForm(forms.ModelForm):
 
 class CantRecetaAdmin(admin.ModelAdmin):
     form = CantRecetaAdminForm
-    list_display = ['medida','cantidad_total']
+    list_display = ['cantidad_total']
 
 admin.site.register(CantReceta, CantRecetaAdmin)
 
