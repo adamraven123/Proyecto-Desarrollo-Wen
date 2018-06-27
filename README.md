@@ -21,3 +21,9 @@ Para la instalacion se le aconseja seguir estos pasos :
 solucion problematica
 Para solucionar la problemática en cuestión (administración de stock y de pedidos) desarrollamos una plataforma que busca facilitar el proceso de pedidos para que puedan ser realizados de manera autónoma de parte del cliente y a su vez mas sencilla para registrar por parte del vendedor. Y para la parte del stock creamos un administrador que permite realizar reabastecimientos y llevar cuentas de stock automáticamente en razón de los pedidos.
 
+Este proyecto fue realizado por:
+	Nicolas Cordova ( JP )
+	Alvaro Abarca
+	Israel Castro
+	
+
