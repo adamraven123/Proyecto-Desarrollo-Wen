@@ -18,7 +18,7 @@
                 <div class="card text-center">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col ">
+                            <div class="col">
                                 <h4>
                                     <strong class="card-name float-sm-left pt-2">Lista de Pasteles</strong>
                                 </h4>
@@ -26,7 +26,7 @@
                             <div class="col">
                                 <ul class="nav nav-pills card-header-pills float-sm-right pt-2">
                                     <li class="nav-item">
-                                        <a class="nav-link active bg-success" data-toggle="modal" data-target="#UserModal">
+                                        <a class="nav-link active bg-success text-white" data-toggle="modal" data-target="#UserModal">
                                             <i class="fa fa-plus"></i> Agregar</a>
                                     </li>
                                 </ul>
@@ -161,6 +161,49 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="PastelModal" role="dialog" aria-labelledby="UserModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Crear Pastel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formpastel" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre_input">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre_input" name="nombre_input" aria-describedby="nombreHelp" placeholder="Ingrese su nombre" required> {% comment %}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                    </div>
+                    <div class="form-group">
+                        <label for="base_input">Base:</label>
+                        <select type="text" class="form-control" id="base_input" name="base_input" aria-describedby="baseHelp" required> {% comment %}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9">
+                                <label class="pt-2" for="apellidos_input">Capas:</label>
+                                <small id="cantidadHelp" class="form-text text-muted">Cada capa consiste de una crema y algunos ingredientes a elección.</small>
+                            </div>
+                            <div class="col-2 col-offset-1 pt-4 float-sm-right">
+                                <a class="btn bg-success text-white" id="agregar_capa"><i class="fa fa-plus"></i></a>
+                            </div>
+                        </div>            
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="base_create" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %} {% block javascript %}
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
@@ -209,5 +252,41 @@
             $('#ing_'+i).select2();
             i ++;
         })
+        $("#agregar_capa").click(function(){
+            var n_div = '<div class="form-group animated fadeIn">\
+                            <div class="row">\
+                                <div class="col">\
+                                    <label for="rut_input" >Crema:</label>\
+                                    <select class="form-control cre_select" name="cre_'+i+'" id="cre_'+i+'" aria-describedby="tipoHelp" required>\
+                                        <option value="CC" selected>Crema de Chocolate</option>\
+                                        <option value="CB" >Crema Batida</option>\
+                                        <option value="NL" >Nutella</option>\
+                                        <option value="MJ" >Manjar</option>\
+                                        <option value="CP" >Crema Pastelera</option>\
+                                        <option value="CM" >Crema Mantequilla</option>\
+                                        <option value="ME" >Merengue</option>\
+                                    </select>\
+                                </div>\
+                                <div class="col">\
+                                    <label for="dv_input" >Ingredientes:</label>\
+                                    <select class="form-control" name="ing_'+i+'" id="ing_'+i+'" aria-describedby="cantHelp" multiple="multiple" required>\
+                                        {% for ingrediente in ingredientes %}<option value="{{material.pk}}">{{material.nombre}}</option>{% endfor %}\
+                                    </select>\
+                                </div>\
+                            </div>\
+                        </div>'
+            $('#formpastel').append(n_div);
+            $('#ing_'+i).select2();
+            $('#cre_'+i).select2();
+            
+            i ++;
+        })
     })
+    ('CC', 'Crema de chocolate'),
+    ('CB', 'Crema batida'),
+    ('NL', 'Nutella'),
+    ('MJ', 'Manjar'),
+    ('CP', 'Crema Pastelera'),
+    ('CM', 'Crema de Mantequilla'),
+    ('ME', 'Merengue'),
 </script> {% endblock javascript %}
