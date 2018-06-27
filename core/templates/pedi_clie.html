@@ -38,8 +38,10 @@
 		<div id="prefab" class="col-12 ">
 			<div class="card">
 			  <div class="card-body">
-				<h2 class="text-center card-title">Nuestra seleccion para ti </h2>
-				<hr>
+			  	<div class="card-header">
+					<h2 class="text-center">Nuestra seleccion para ti </h2>
+			  	</div>
+				
 					<div  class="row text-center">
 					{% for x in objet_list %}
 						<div class="col-3 pt-4 pr-4 pl-4 mr-5 mt-5 text-center">
@@ -63,164 +65,13 @@
 	<div class="row">
 		<div id="create" class="col-12">
 			<div class="card">
-			  <div class="card-body">
-			<div class="row">
-				<div class="col-12">
-					<h1 class="card-title text-center">Tu Pastel, Tus gustos</h1>
-					<hr>
+			  	<div class="card-body">
+			
 				</div>
-				<div class="col-12">
-					<div class="row">
-						<div class="col-8">
-							<img id="img1" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-2.png' %}" alt="">
-							<img id="img2" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-3.png' %}" style="display:none;" alt="">
-							<img id="img3" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-4.png' %}" style="display:none;" alt="">
-						</div>
-						<div class="col-4">
-							<div id="bloque1" class="card text-white bg-success mb-4 " style="margin-top: 9%;">
-								<div class="card-header">Tus elecciones</div>
-								<div class="card-body" style="margin-top: -5%;">
-									<div class="dropdown">
-										<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Para cuantas personas?</button>
-										<div class="dropdown-menu">
-											<a class="dropdown-item boton_p 20">20 personas</a>
-											<a class="dropdown-item 30 boton_p">30 personas</a>
-											<a class="dropdown-item 40 boton_p">40 personas</a>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Que base le gustaria?</button>
-											<div class="dropdown-menu">
-												{% for x in bases %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 1ra capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 2da capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-									</div>
-									<button type="button" class="btn btn-danger inter-space" data-toggle="dropdown">Pedir Pastel </button>
-								</div>
-								<div id="bloque2" class="card text-white bg-success mb-4 " style="margin-top: 9%; display:none;">
-									<div class="card-header">Tus elecciones</div>
-									<div class="card-body" style="margin-top: -5%;">
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Para cuantas personas?</button>
-											<div class="dropdown-menu">
-												<a class="dropdown-item boton_p 20">20 personas</a>
-												<a class="dropdown-item 30 boton_p">30 personas</a>
-												<a class="dropdown-item 40 boton_p">40 personas</a>
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Que base le gustaria?
-									</button>
-											<div class="dropdown-menu">
-												{% for x in bases %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 1ra capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 2da capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 3ra capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-									</div>
-									<button type="button" class="btn btn-danger inter-space" data-toggle="dropdown">Pedir Pastel </button>
-								</div>
-								<div id="bloque3" class="card text-white bg-success mb-4 " style="margin-top: 9%; display:none;">
-									<div class="card-header">Tus elecciones</div>
-									<div class="card-body" style="margin-top: -5%;">
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Para cuantas personas?</button>
-											<div class="dropdown-menu">
-												<a class="dropdown-item boton_p 20">20 personas</a>
-												<a class="dropdown-item 30 boton_p">30 personas</a>
-												<a class="dropdown-item 40 boton_p">40 personas</a>
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">¿Que base le gustaria?
-									</button>
-											<div class="dropdown-menu">
-												{% for x in bases %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 1ra capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown"><button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 2da capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown"><button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 3ra capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle inter-space" data-toggle="dropdown">Ingrediente 4ta capa </button>
-											<div class="dropdown-menu">
-												{% for x in ingre %}
-												<a class="dropdown-item">{{x.nombre}}</a>
-												{% endfor %}
-											</div>
-										</div>
-									</div>
-									<button type="button" class="btn btn-danger inter-space" data-toggle="dropdown">Pedir Pastel </button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> </div> </div>
+			</div> 
+		</div> 
 	</div>
+</div>
 
 	{% endblock content %} {% block javascript %}
 	<script>
