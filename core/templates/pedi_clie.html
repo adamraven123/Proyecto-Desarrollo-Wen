@@ -4,7 +4,7 @@
 		<div class="col-12">
 			<div class="card">
 			  <div class="card-body">
-				<h2 class="card-title"> Dinos que quieres </h1>
+				<h2 class="card-title text-center"> Dinos que quieres </h1>
 			 	<hr>
 				<!-- Cards Inicio-->
 				<div class="row">
@@ -40,35 +40,38 @@
 			  <div class="card-body">
 				<h2 class="text-center card-title">Nuestra seleccion para ti </h2>
 				<hr>
-			<div  class="row text-center">
-			{% for x in objet_list %}
-				<div class="col-3 pt-4 pr-4 pl-4 mr-5 mt-5 text-center">
-					<div class="card" style="width: 18rem;">
-						<img class="card-img-top" src="{{x.image.url}}" alt="Card image cap">
-						<div class="card-body">
-							<h5 class="card-title">{{x.nombre}}</h5>
-							<p class="card-text">{{x.get_capas|safe}}</p>
-							<a href="#" class="btn btn-primary">quiero este pastelito</a>
+					<div  class="row text-center">
+					{% for x in objet_list %}
+						<div class="col-3 pt-4 pr-4 pl-4 mr-5 mt-5 text-center">
+							<div class="card" style="width: 18rem;">
+								<img class="card-img-top" src="{{x.image.url}}" alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title">{{x.nombre}}</h5>
+									<p class="card-text">{{x.get_capas|safe}}</p>
+									<a href="#" class="btn btn-primary">quiero este pastelito</a>
+								</div>
+							</div>
 						</div>
+						{% endfor %}
 					</div>
 				</div>
-				{% endfor %}
 			</div>
 		</div>
 	</div>
 </div>
-</div>
-</div>
 <div class="container">
 	<div class="row">
 		<div id="create" class="col-12">
+			<div class="card">
+			  <div class="card-body">
 			<div class="row">
-				<div class="col-12 text-center">
-					<h1 class="card-title">Tu Pastel, Tus gustos</h1>
+				<div class="col-12">
+					<h1 class="card-title text-center">Tu Pastel, Tus gustos</h1>
+					<hr>
 				</div>
 				<div class="col-12">
 					<div class="row">
-						<div class="container col-8">
+						<div class="col-8">
 							<img id="img1" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-2.png' %}" alt="">
 							<img id="img2" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-3.png' %}" style="display:none;" alt="">
 							<img id="img3" class="rounded img-pastel img-fluid" src="{% static 'images/pastel-4.png' %}" style="display:none;" alt="">
@@ -216,7 +219,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> </div> </div>
 	</div>
 
 	{% endblock content %} {% block javascript %}
