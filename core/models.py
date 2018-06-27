@@ -78,6 +78,9 @@ class BasePastel(models.Model):
 		for cant in self.receta.all():
 			salida += "%d %s de %s, " % (cant.cantidad,cant.ingrediente.stock.medida,cant.ingrediente.nombre)
 		return salida[:-2]
+	
+	def __str__(self):
+		return self.nombre
 
 class Pedido(models.Model):
 	fecha_pedido = models.DateField(default=date.today)

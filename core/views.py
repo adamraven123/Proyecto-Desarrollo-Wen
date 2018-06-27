@@ -155,10 +155,12 @@ def create_base(request):
 
 def create_pastel(request):
 	print(request.POST)
+	print(request.FILES)
 	name = request.POST['pastel_input']
 	cover = request.POST['cover_input']
 	base = request.POST['base_input']
-	image = request.POST['img_pastel']
+	base = BasePastel.objects.get(pk=int(base))
+	image = request.FILES['imgpastel']
 	pastel = Pastel.objects.create(
 		nombre = name,
 		cover = cover,
@@ -186,7 +188,9 @@ def create_pastel(request):
 				capa.ingredientes.add(ingrediente)
 				capa.save()
 				ing_pk = request.POST['ing_'+str(i)]
-				
+			
+			pastel.capas.add(capa)
+			pastel.save()
 			i+=1
 		except MultiValueDictKeyError:
 			break
