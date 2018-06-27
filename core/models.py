@@ -65,7 +65,7 @@ class CantReceta(models.Model):
 	ingrediente = models.ForeignKey(Material,null=True,on_delete=models.SET_NULL)
 	cantidad = models.IntegerField(default=0)
 	def cantidad_total(self):
-		return '{} {}'.format(self.cantidad, self.medida)
+		return '{} {}'.format(self.cantidad, self.ingrediente.stock.medida)
 
 class BasePastel(models.Model):
 	nombre = models.CharField(max_length=500,null=True,blank=True)
@@ -73,8 +73,8 @@ class BasePastel(models.Model):
 	
 	def get_receta(self):
 		salida = ""
-		for cant in self.receta:
-			salida += "%d %s de %s, " % (cant.cantidad,cant.medida,cant.ingrediente.nombre)
+		for cant in self.receta.all():
+			salida += "%d %s de %s, " % (cant.cantidad,cant.ingrediente.stock.medida,cant.ingrediente.nombre)
 		return salida[:-2]
 
 class Pedido(models.Model):

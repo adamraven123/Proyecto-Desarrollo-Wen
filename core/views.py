@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from core.models import *
 from django.http import JsonResponse
+from django.utils.datastructures import MultiValueDictKeyError
 from .forms import MaterialForm
 # Create your views here.
 
@@ -114,6 +115,7 @@ def admin_pastel(request):
 		return JsonResponse({'mensaje':'El usuario ha sido creado con éxito. \n La contraseña es una combinación de su primer y su dígito verificador.'})
 	else:
 		data['pasteles'] = Pastel.objects.all()
+		data['bases'] = BasePastel.objects.all()
 		data['materiales'] = Material.objects.filter(tipo="MP").all()
 		template_name = 'pastel/admin_pastel.html'
 		return render(request,template_name,data)
@@ -134,6 +136,7 @@ def create_base(request):
 	while i < 200:
 		try:
 			ing_pk = request.POST['ing_'+str(i)]
+			print("Esta es la ing_pk ",ing_pk)
 			ingrediente = Material.objects.get(pk=ing_pk)
 			cantidad = request.POST['cant_'+str(i)]
 			receta = CantReceta.objects.create(
@@ -142,7 +145,8 @@ def create_base(request):
 			)
 			receta.save()
 			n_base.receta.add(receta)
-		except IndexError:
+			i+=1
+		except MultiValueDictKeyError:
 			break
 
 	return JsonResponse({"mensaje":"ok"})
