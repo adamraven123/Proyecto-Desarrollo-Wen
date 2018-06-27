@@ -10,4 +10,5 @@ urlpatterns = [
 	path('admin_pastel/',views.admin_pastel, name = "admin_pastel"),
 	path('pedidos/',views.pedidos, name = "pedidos"),
 	path('create_base/',views.create_base, name = "create_base"),
+	path('create_pastel/',views.create_pastel, name = "create_pastel"),
 ]
