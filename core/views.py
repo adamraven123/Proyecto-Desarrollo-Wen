@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from core.models import *
-from django.http import JsonResponse
+from django.urls import reverse
+from django.http import JsonResponse,HttpResponseRedirect
 from django.utils.datastructures import MultiValueDictKeyError
 from .forms import MaterialForm
 # Create your views here.
@@ -151,3 +152,43 @@ def create_base(request):
 			break
 
 	return JsonResponse({"mensaje":"ok"})
+
+def create_pastel(request):
+	print(request.POST)
+	name = request.POST['pastel_input']
+	cover = request.POST['cover_input']
+	base = request.POST['base_input']
+	image = request.POST['img_pastel']
+	pastel = Pastel.objects.create(
+		nombre = name,
+		cover = cover,
+		base = base,
+		image = image,
+	)
+	pastel.save()
+
+	i = 0
+	while i < 200:
+		try:
+			crema = request.POST['cre_'+str(i)]
+			capa = CapaPastel.objects.create(
+				crema = crema,
+			)
+			capa.save()
+			try:
+				ing_pk = request.POST.getlist('ing_'+str(i)+'[]')
+				for pk in ing_pk:
+					ingrediente = Material.objects.get(pk=pk)
+					capa.ingredientes.add(ingrediente)
+					capa.save()
+			except:
+				ingrediente = Material.objects.get(pk=ing_pk)
+				capa.ingredientes.add(ingrediente)
+				capa.save()
+				ing_pk = request.POST['ing_'+str(i)]
+				
+			i+=1
+		except MultiValueDictKeyError:
+			break
+
+	return HttpResponseRedirect(reverse('admin_pastel'))

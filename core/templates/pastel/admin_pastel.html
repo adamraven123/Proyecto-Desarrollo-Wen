@@ -171,31 +171,37 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formpastel" action="">
+                <form id="formpastel" action="{% url 'create_pastel' %}" enctype="multiplart/formdata">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="nombre_input">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre_input" name="nombre_input" aria-describedby="nombreHelp" placeholder="Ingrese su nombre" required> {% comment %}
+                        <label for="pastel_input">Nombre:</label>
+                        <input type="text" class="form-control" id="pastel_input" name="pastel_input" aria-describedby="pastelHelp" placeholder="Ingrese su nombre" required> {% comment %}
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
                     </div>
-                    <div class="form-group">
-                        <label for="base_input">Base:</label>
-                        <select type="text" class="form-control" id="base_input" name="base_input" aria-describedby="baseHelp" required>
-                            {% for base in bases %}
-                            <option value="{{base.pk}}" ></option>
-                            {% endfor %}
-                        </select>
-                        {% comment %}
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
-                    </div>
-                    <div class="form-group">
-                        <label for="base_input">Covertura:</label>
-                        <select type="text" class="form-control" id="cover_input" name="cover_input" aria-describedby="coverHelp" required> 
-                            <option value="FT" >Fondant</option>
-                            <option value="CR" >Crema</option>
-                            <option value="CH" >Chocolate</option>
-                            <option value="MR" >Mermelada</option>
-                        </select>
+                    <div class="form-group pt-2">
+                        <div class="row">
+                            <div class="col">
+                                <label for="base_input">Base:</label>
+                                <select type="text" class="form-control" id="base_input" name="base_input" aria-describedby="baseHelp" required>
+                                    {% for base in bases %}
+                                    <option value="{{base.pk}}" >{{base.nombre}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="cover_input">Covertura:</label>
+                                <select type="text" class="form-control" id="cover_input" name="cover_input" aria-describedby="coverHelp" required> 
+                                    <option value="FT" >Fondant</option>
+                                    <option value="CR" >Crema</option>
+                                    <option value="CH" >Chocolate</option>
+                                    <option value="MR" >Mermelada</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group pt-4" >
+                            <label for="img_pastel">Imagen:</label>
+                            <input type="file" class="form-control-file" name='imgpastel' id="imgpastel">
+                        </div>
                         {% comment %}
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %}
                     </div>
@@ -211,11 +217,11 @@
                         </div>            
                     </div>
                     <div class="dropdown-divider"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="pastel_create" class="btn btn-primary">Save changes</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="base_create" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -231,8 +237,26 @@
         $('#tabla').DataTable();
         $('#tabla2').DataTable();
         $('.ing_select').select2();
+        $('#cover_input').select2({ width: 'resolve' });
+        $('#base_input').select2({ width: 'resolve' });
+        //$("#pastel_create").click(function () {
+        //data = $("#formpastel").serializeArray();
+        //    $.ajax({
+        //        type: "post",
+        //        url: "{% url 'create_pastel' %}",
+        //        data: data,
+        //        success: function (response) {
+        //            swal("Exito!", response.mensaje, 'success')
+        //                .then((value) => {
+        //                    window.location.reload();
+        //                });;
+        //        },
+        //        error: function () {
+        //            swal("Error", "Algo salío mal, por favor verifique los campos.", 'warning');
+        //        },
+        //    });
+        //});
         $("#base_create").click(function () {
-            console.log("Click");
             data = $("#formbase").serializeArray();
             $.ajax({
                 type: "post",
@@ -286,7 +310,7 @@
                                 <div class="col">\
                                     <label for="dv_input" >Ingredientes:</label>\
                                     <select class="form-control" name="ing_'+i+'" id="ing_'+i+'" aria-describedby="cantHelp" multiple="multiple" required>\
-                                        {% for ingrediente in ingredientes %}<option value="{{material.pk}}">{{material.nombre}}</option>{% endfor %}\
+                                        {% for ingrediente in ingredientes %}<option value="{{ingrediente.pk}}">{{ingrediente.nombre}}</option>{% endfor %}\
                                     </select>\
                                 </div>\
                             </div>\
